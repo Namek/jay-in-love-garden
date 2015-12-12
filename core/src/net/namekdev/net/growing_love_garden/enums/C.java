@@ -24,7 +24,8 @@ public interface C {
 		public static final float GrowTempoMax = 0.06f;
 		public static final float ScaleYMin = 0.1f;
 		public static final float ScaleYMax = 1f;
-		public static final float FallSpeed = 50f;
+		public static final float NaturalFallSpeed = 50f;
+		public static final float StompFallSpeed = 80f;
 		public static final float LyingDuration = 5f;
 		public static final float LifeProgressStartMin = 0;
 		public static final float LifeProgressStartMax = 0.1f;
@@ -41,5 +42,6 @@ public interface C {
 		public static final float ShakeWidthMax = 10;
 		public static final float ShakeHeightMin = 1;
 		public static final float ShakeHeightMax = 3;
+		public static final float TimeToDetachLeafs = C.Player.StompDuration/2;
 	}
 }

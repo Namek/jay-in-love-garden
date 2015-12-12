@@ -9,11 +9,15 @@ import com.artemis.Aspect;
 import com.artemis.Aspect.Builder;
 import com.artemis.Entity;
 import com.artemis.systems.EntityProcessingSystem;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 public class PlayerStompSystem extends EntityProcessingSystem {
 	M<Stomp> mStomp;
 	
 	CameraSystem cameraSystem;
+	LeafLifeSystem leafLifeSystem;
+	PlayerStateSystem playerState;
 
 
 	public PlayerStompSystem() {
@@ -31,6 +35,17 @@ public class PlayerStompSystem extends EntityProcessingSystem {
 		}
 
 		cameraSystem.shake(C.Player.StompDuration);
+		
+		
+		final int treeId = playerState.findCloseTree();
+		
+		if (treeId >= 0) {		
+			Timer.schedule(new Task() {
+				@Override
+				public void run() {
+					leafLifeSystem.detachLeafs(treeId);
+				}
+			}, C.World.TimeToDetachLeafs);
+		}
 	}
-
 }

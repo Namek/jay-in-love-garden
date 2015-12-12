@@ -12,6 +12,7 @@ import com.artemis.Entity;
 import com.artemis.EntitySystem;
 import com.artemis.managers.TagManager;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.utils.IntBag;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
@@ -21,6 +22,8 @@ public class PlayerStateSystem extends BaseSystem {
 	M<Pos> mPos;
 	M<Stomp> mStomp;
 	
+	AspectHelpers aspects;
+	CollisionSystem collisions;
 	TagManager tags;
 	
 	Input input;
@@ -55,6 +58,21 @@ public class PlayerStateSystem extends BaseSystem {
 		if (input.isKeyJustPressed(Keys.SPACE)) {
 			mStomp.create(e);
 		}
+	}
+
+	public int findCloseTree() {
+		Entity player = tags.getEntity(Tags.Player);
+		
+		IntBag trees = aspects.getTrees();
+		for (int i = 0, n = trees.size(); i < n; ++i) {
+			int treeId = trees.get(i);
+			
+			if (collisions.checkOverlap(player.getId(), treeId)) {
+				return treeId;
+			}
+		}
+		
+		return -1;
 	}
 
 }

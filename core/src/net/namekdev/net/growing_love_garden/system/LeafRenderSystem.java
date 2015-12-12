@@ -3,13 +3,13 @@ package net.namekdev.net.growing_love_garden.system;
 import static com.badlogic.gdx.math.Interpolation.exp10In;
 import static com.badlogic.gdx.math.Interpolation.exp10Out;
 import static com.badlogic.gdx.math.Interpolation.pow4In;
-import static net.namekdev.net.growing_love_garden.enums.LeafStadium.*;
+import static net.namekdev.net.growing_love_garden.enums.LeafLifeStadium.*;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.namekdev.net.growing_love_garden.component.Colored;
 import net.namekdev.net.growing_love_garden.component.LoveLeaf;
 import net.namekdev.net.growing_love_garden.component.Scale;
 import net.namekdev.net.growing_love_garden.enums.C;
-import net.namekdev.net.growing_love_garden.enums.LeafStadium;
+import net.namekdev.net.growing_love_garden.enums.LeafLifeStadium;
 import net.namekdev.net.growing_love_garden.utils.ActionSequenceTimer;
 
 import com.artemis.Aspect;
@@ -53,11 +53,7 @@ public class LeafRenderSystem extends EntityProcessingSystem {
 		LoveLeaf leaf = mLeaf.get(e);
 		Colored col = mColored.get(e);
 		Scale scale = mScale.get(e);
-		
-		if (leaf.justStartedGrowing) {
-			// TODO animate scale tween
-			// TODO would be better as event
-		}
+
 		
 		// glow when ready to collect
 		if (leaf.stadium.isGrowing()) {
@@ -79,7 +75,11 @@ public class LeafRenderSystem extends EntityProcessingSystem {
 			}
 		}
 		else if (leaf.stadium == GettingYellow) {
-			col.color.set(Color.YELLOW);
+			float bl = C.Leaf.Stadium.GettingYellow;
+			float br = C.Leaf.Stadium.GettingSmaller;
+			float w = br - bl;
+			float yellowingProgress = MathUtils.clamp(leaf.lifeProgress - bl, 0, w) / w; 
+			col.color.set(0, 1, 0, 1).lerp(Color.YELLOW, yellowingProgress);
 		}
 		else if (leaf.stadium == GettingSmaller) {
 			// getting red

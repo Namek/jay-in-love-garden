@@ -19,6 +19,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 	public void create() {
 		WorldConfiguration cfg = new WorldConfigurationBuilder()
 			.with(new ExtendedComponentMapperPlugin())
+			.with(new AspectHelpers())
 			.with(new EntityFactory())
 			.with(new WorldInitSystem())
 			.with(new TagManager())
@@ -26,6 +27,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 			// loop systems
 			.with(new PlayerStateSystem())
 			.with(new PlayerStompSystem())
+			.with(new CollisionSystem())
 			.with(new LeafLifeSystem())
 			.with(new LeafRenderSystem())
 			.with(new CameraSystem())

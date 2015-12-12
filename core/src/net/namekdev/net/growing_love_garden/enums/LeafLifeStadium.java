@@ -1,13 +1,12 @@
 package net.namekdev.net.growing_love_garden.enums;
 
-public enum LeafStadium {
+public enum LeafLifeStadium {
 	None,
 	Small,
 	Bigger,
 	GettingYellow,
 	GettingSmaller,
-	Falls,
-	Lying;
+	Dead;
 
 
 	public boolean isGrowing() {
@@ -23,44 +22,43 @@ public enum LeafStadium {
 	}
 	
 	public boolean isDead() {
-		int val = ordinal();
-		return val == Falls.ordinal() || val == Lying.ordinal();
+		return ordinal() == Dead.ordinal();
 	}
 	
-	public boolean isPast(LeafStadium stadium) {
+	public boolean isPast(LeafLifeStadium stadium) {
 		return ordinal() > getIndex(stadium);
 	}
 	
-	public boolean isInOrPast(LeafStadium stadium) {
+	public boolean isInOrPast(LeafLifeStadium stadium) {
 		return ordinal() >= getIndex(stadium);
 	}
 	
-	public boolean isBefore(LeafStadium stadium) {		
+	public boolean isBefore(LeafLifeStadium stadium) {		
 		return ordinal() < getIndex(stadium);
 	}
 	
-	public boolean isInOrBefore(LeafStadium stadium) {		
+	public boolean isInOrBefore(LeafLifeStadium stadium) {		
 		return ordinal() <= getIndex(stadium);
 	}
 	
-	public boolean isBetweenExclusive(LeafStadium left, LeafStadium right) {
+	public boolean isBetweenExclusive(LeafLifeStadium left, LeafLifeStadium right) {
 		return isPast(left) && isBefore(right);
 	}
 	
-	public boolean isBetweenInclusive(LeafStadium left, LeafStadium right) {
+	public boolean isBetweenInclusive(LeafLifeStadium left, LeafLifeStadium right) {
 		return isMin(left) && isMax(right);
 	}
 	
-	public boolean isMin(LeafStadium stadium) {
+	public boolean isMin(LeafLifeStadium stadium) {
 		return isInOrPast(stadium);
 	}
 	
-	public boolean isMax(LeafStadium stadium) {
+	public boolean isMax(LeafLifeStadium stadium) {
 		return isInOrBefore(stadium);
 	}
 	
-	private int getIndex(LeafStadium stadium) {
-		LeafStadium[] vals = values();
+	private int getIndex(LeafLifeStadium stadium) {
+		LeafLifeStadium[] vals = values();
 
 		for (int i = 0; i < vals.length; ++i) {
 			if (vals[i] == stadium) {
