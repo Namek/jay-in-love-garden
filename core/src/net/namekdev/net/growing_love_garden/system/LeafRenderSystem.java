@@ -7,6 +7,7 @@ import static net.namekdev.net.growing_love_garden.enums.LeafLifeStadium.*;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.namekdev.net.growing_love_garden.component.Colored;
 import net.namekdev.net.growing_love_garden.component.LoveLeaf;
+import net.namekdev.net.growing_love_garden.component.Pos;
 import net.namekdev.net.growing_love_garden.component.Scale;
 import net.namekdev.net.growing_love_garden.enums.C;
 import net.namekdev.net.growing_love_garden.enums.LeafLifeStadium;
@@ -27,6 +28,7 @@ import com.badlogic.gdx.math.MathUtils;
 public class LeafRenderSystem extends EntityProcessingSystem {
 	M<LoveLeaf> mLeaf;
 	M<Colored> mColored;
+	M<Pos> mPos;
 	M<Scale> mScale;
 	
 	ActionSequenceTimer leafColorTimer = new ActionSequenceTimer(
@@ -52,6 +54,7 @@ public class LeafRenderSystem extends EntityProcessingSystem {
 	protected void process(Entity e) {
 		LoveLeaf leaf = mLeaf.get(e);
 		Colored col = mColored.get(e);
+		Pos pos = mPos.get(e);
 		Scale scale = mScale.get(e);
 
 		

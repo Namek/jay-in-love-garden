@@ -94,7 +94,7 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 		renderable.visible = leaf.stadium != LeafLifeStadium.None;
 	}
 
-	public void detachLeafs(int treeId) {
+	public IntBag detachLeafs(int treeId) {
 		IntBag leafs = aspects.getLeafs(treeId);
 		
 		for (int i = 0, n = leafs.size(); i < n; ++i) {
@@ -106,6 +106,8 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 				leaf.fallSpeed = C.Leaf.StompFallSpeed;
 			}
 		}
+		
+		return leafs;
 	}
 	
 	private boolean canDetachLeaf(LoveLeaf leaf) {

@@ -49,7 +49,8 @@ public class AspectHelpers extends PassiveSystem {
 		return Utils.filterBag(leafs, new IntBagPredicate() {
 			@Override
 			public boolean apply(int e) {
-				return mPosChild.get(e).parent == parentTreeId;
+				PosChild posChild = mPosChild.getSafe(e);
+				return posChild != null && posChild.parent == parentTreeId;
 			}
 		});
 	}

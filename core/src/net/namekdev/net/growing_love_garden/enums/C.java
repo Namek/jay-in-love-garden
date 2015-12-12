@@ -34,6 +34,10 @@ public interface C {
 		public static final float LyingDuration = 5f;
 		public static final float LifeProgressStartMin = 0;
 		public static final float LifeProgressStartMax = 0.1f;
+		public static final float VacuumSpeedFactor = 0.2f;
+		public static final float VacuumSpeedMin = 3f;
+		public static final float VacuumSpeedMax = 7.40f;
+		public static final float VacuumDisappearDistance = 25;
 		
 		public interface Stadium {
 			public static final float Bigger = 0.4f;

@@ -1,5 +1,6 @@
 package net.namekdev.net.growing_love_garden;
 
+import net.mostlyoriginal.api.event.common.EventSystem;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
 import net.namekdev.net.growing_love_garden.system.*;
 
@@ -25,16 +26,19 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 			.with(new TagManager())
 	
 			// loop systems
+			.with(new GameStateSystem())
 			.with(new PlayerStateSystem())
 			.with(new PlayerStompSystem())
 			.with(new CollisionSystem())
 			.with(new LeafLifeSystem())
 			.with(new LeafRenderSystem())
 			.with(new CameraSystem())
+			.with(new LeafVacuumSystem())
 			.with(new DepthSystem())
 			.with(new RenderSystem())
 			.with(new GameStatsRenderSystem())
 			.with(new CollisionDebugSystem())
+			.with(new EventSystem())
 			.build();
 		
 		world = new World(cfg);
