@@ -25,8 +25,10 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 	
 			// loop systems
 			.with(new PlayerStateSystem())
+			.with(new PlayerStompSystem())
 			.with(new LeafLifeSystem())
 			.with(new LeafRenderSystem())
+			.with(new CameraSystem())
 			.with(new DepthSystem())
 			.with(new RenderSystem())
 			.build();

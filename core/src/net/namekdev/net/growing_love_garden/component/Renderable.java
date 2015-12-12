@@ -9,11 +9,13 @@ public class Renderable extends PooledComponent {
 		Sprite
 	}
 	
+	public boolean visible = true; 
 	public Type type = Type.Sprite;
 	public TextureRegion sprite;
 
 	@Override
 	protected void reset() {
+		visible = true;
 		type = Type.Sprite;
 		sprite = null;
 	}

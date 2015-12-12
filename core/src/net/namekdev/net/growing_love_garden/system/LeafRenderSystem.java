@@ -52,7 +52,7 @@ public class LeafRenderSystem extends EntityProcessingSystem {
 		}
 		
 		// glow when ready to collect
-		if (leaf.stadium == LeafStadium.Bigger) {
+		if (leaf.stadium.isGrowing()) {
 			int ai = leafColorTimer.getCurrentActionIndex();
 			float progress = leafColorTimer.getCurrentActionProgress();
 			if (ai == 1) {
@@ -61,6 +61,9 @@ public class LeafRenderSystem extends EntityProcessingSystem {
 
 			float c = progress;
 			col.color.set(0, 0.8f + progress/5, 0, 1f);
+		}
+		else if (leaf.stadium.isInOrPast(LeafStadium.GettingYellow)) {
+			col.color.set(1f, 0.88f, 0, 1);
 		}
 		else {
 			col.color.set(0, 0.8f, 0, 1);

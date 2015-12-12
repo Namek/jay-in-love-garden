@@ -19,6 +19,7 @@ import com.badlogic.gdx.Input;
 
 public class PlayerStateSystem extends BaseSystem {
 	M<Pos> mPos;
+	M<Stomp> mStomp;
 	
 	TagManager tags;
 	
@@ -49,6 +50,10 @@ public class PlayerStateSystem extends BaseSystem {
 		
 		if (isMoving) {
 			// TODO animate walk
+		}
+		
+		if (input.isKeyJustPressed(Keys.SPACE)) {
+			mStomp.create(e);
 		}
 	}
 

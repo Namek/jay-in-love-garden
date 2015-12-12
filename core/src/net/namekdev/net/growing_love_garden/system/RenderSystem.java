@@ -11,11 +11,11 @@ import net.namekdev.net.growing_love_garden.component.Scale;
 import com.artemis.Aspect;
 import com.artemis.Entity;
 import com.artemis.EntitySystem;
-import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.utils.Bag;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -26,6 +26,8 @@ public class RenderSystem extends EntitySystem {
 	M<PosChild> mPosChild;
 	M<Renderable> mRenderable;
 	M<Scale> mScale;
+	
+	CameraSystem cameraSystem;
 
 	SpriteBatch batch;
 	
@@ -38,10 +40,11 @@ public class RenderSystem extends EntitySystem {
 	protected void initialize() {
 		batch = new SpriteBatch();
 	}
-	
 
 	@Override
 	protected void processSystem() {
+        batch.setProjectionMatrix(cameraSystem.camera.combined);
+
 		Gdx.gl.glClearColor(0, 0, 1, 0.97f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -61,6 +64,10 @@ public class RenderSystem extends EntitySystem {
 		Pos pos = mPos.get(e);
 		Scale scale = mScale.getSafe(e);
 		Origin origin = mOrigin.getSafe(e);
+		
+		if (!renderable.visible) {
+			return;
+		}
 		
 		float scaleX = scale != null ? scale.x : 1f;
 		float scaleY = scale != null ? scale.y : 1f;

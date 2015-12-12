@@ -10,15 +10,17 @@ public class LoveLeaf extends PooledComponent {
 	public boolean justStartedGrowing;
 	public float growProgress;
 	public float growTempo;
+	public float leftLyingTime;
 
 
 	@Override
-	protected void reset() {
+	public void reset() {
 		stadium = LeafStadium.None;
 		stadiumJustChanged = false;
 		justStartedGrowing = false;
 		growProgress = 0;
 		growTempo = 0;
+		leftLyingTime = 0;
 	}
 
 

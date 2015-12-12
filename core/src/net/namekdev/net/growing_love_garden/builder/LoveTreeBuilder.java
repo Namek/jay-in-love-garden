@@ -88,6 +88,7 @@ public class LoveTreeBuilder {
 			te.create(LoveLeaf.class);
 			te.create(PosChild.class).parent = treeEntity.getId();
 			te.create(Pos.class).xy(lx, ly);
+			te.create(OrigPos.class).xy(lx, ly);
 			te.create(Renderable.class).setToSprite(leafTex);
 			te.create(Colored.class);
 			te.create(Scale.class);
