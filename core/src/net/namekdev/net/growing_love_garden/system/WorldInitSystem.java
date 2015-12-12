@@ -9,8 +9,11 @@ public class WorldInitSystem extends BaseSystem {
 	
 
 	private void init() {
-		// create: some trees, Jay
 		factory.createTree(150, 200, 0);
+		factory.createTree(450, 100, 0);
+		factory.createTree(420, 470, 0);
+		factory.createTree(850, 400, 0);
+		factory.createTree(1000, 120, 0);
 	}
 
 	@Override
