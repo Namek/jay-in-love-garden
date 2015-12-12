@@ -49,4 +49,9 @@ public interface C {
 		public static final float ShakeHeightMax = 3;
 		public static final float TimeToDetachLeafs = C.Player.StompDuration/2;
 	}
+	
+	public interface Levels {
+		public static final int Goal1 = 10000; 
+		public static final int Goal2 = 20000; 
+	}
 }

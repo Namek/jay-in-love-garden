@@ -33,6 +33,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 			.with(new CameraSystem())
 			.with(new DepthSystem())
 			.with(new RenderSystem())
+			.with(new GameStatsRenderSystem())
 			.with(new CollisionDebugSystem())
 			.build();
 		
