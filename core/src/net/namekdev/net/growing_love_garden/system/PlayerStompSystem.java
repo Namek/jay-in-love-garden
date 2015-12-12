@@ -9,6 +9,8 @@ import net.namekdev.net.growing_love_garden.enums.C;
 import net.namekdev.net.growing_love_garden.enums.LeafLifeStadium;
 import net.namekdev.net.growing_love_garden.enums.LeafPositionState;
 import net.namekdev.net.growing_love_garden.event.LeafVacuumedEvent;
+import net.namekdev.net.growing_love_garden.utils.Utils;
+import net.namekdev.net.growing_love_garden.utils.Utils.IntBagPredicate;
 
 import com.artemis.Aspect;
 import com.artemis.Entity;
@@ -22,6 +24,7 @@ public class PlayerStompSystem extends EntityProcessingSystem {
 	M<Stomp> mStomp;
 	
 	CameraSystem cameraSystem;
+	GameStateSystem gameState;
 	LeafLifeSystem leafLifeSystem;
 	LeafVacuumSystem leafVacuum;
 	PlayerStateSystem playerState;
@@ -49,7 +52,12 @@ public class PlayerStompSystem extends EntityProcessingSystem {
 				@Override
 				public void run() {
 					IntBag leafs = leafLifeSystem.detachLeafs(treeId);
-					collectLeafs(leafs);
+					IntBag valuableLeafs = Utils.filterBag(leafs, new IntBagPredicate() {
+						public boolean apply(int e) {
+							return gameState.valueLeaf(e) > 0;
+						}
+					});
+					collectLeafs(valuableLeafs);
 				}
 			}, C.World.TimeToDetachLeafs);
 		}

@@ -26,7 +26,7 @@ public interface C {
 	
 	public interface Leaf {
 		public static final float GrowTempoMin = 0.04f;
-		public static final float GrowTempoMax = 0.06f;
+		public static final float GrowTempoMax = 0.08f;
 		public static final float ScaleYMin = 0.1f;
 		public static final float ScaleYMax = 1f;
 		public static final float NaturalFallSpeed = 50f;
@@ -43,6 +43,11 @@ public interface C {
 			public static final float Bigger = 0.4f;
 			public static final float GettingYellow = 0.8f;
 			public static final float GettingSmaller = 0.9f;
+		}
+		
+		public interface Value {
+			public static final int Bigger = 10;
+			public static final int GettingYellow = 4;
 		}
 	}
 	
