@@ -91,7 +91,7 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 			}
 		}
 		
-//		renderable.visible = leaf.state != LeafPositionState.Lying;
+		renderable.visible = leaf.stadium != LeafLifeStadium.None;
 	}
 
 	public void detachLeafs(int treeId) {
