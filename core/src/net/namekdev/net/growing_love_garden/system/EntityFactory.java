@@ -49,19 +49,21 @@ public class EntityFactory extends PassiveSystem {
 		EntityEdit e = jay.edit();
 		tags.register(Tags.Player, jay);
 
-		e.create(Pos.class).xy(x, y);
-		e.create(Renderable.class).setToSprite(jayTex);
-		
 		float jayWidth = jayTex.getRegionWidth();
 		float jayHeight = jayTex.getRegionHeight();
+
+		e.create(Pos.class).xy(x, y);
+		e.create(Collider.class).wh(C.Player.ColliderBottomWidth, C.Player.ColliderBottomHeight);
+		e.create(Renderable.class).setToSprite(jayTex);
+		
 		
 		// bucket
 		Entity bucket = world.createEntity();
 		e = bucket.edit();
 		tags.register(Tags.Bucket, bucket);
 		
-		float bx = C.Player.BucketLeft - jayWidth/2;
-		float by = jayHeight - C.Player.BucketTop;
+		float bx = C.Bucket.PosLeft - jayWidth/2;
+		float by = jayHeight - C.Bucket.PosTop;
 		
 		e.create(PosChild.class).parent = jay.getId();
 		e.create(Pos.class).xy(bx, by);

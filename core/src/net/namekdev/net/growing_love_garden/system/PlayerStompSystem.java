@@ -34,12 +34,10 @@ public class PlayerStompSystem extends EntityProcessingSystem {
 			return;
 		}
 
-		cameraSystem.shake(C.Player.StompDuration);
-		
-		
 		final int treeId = playerState.findCloseTree();
 		
-		if (treeId >= 0) {		
+		if (treeId >= 0) {
+			cameraSystem.shake(C.Player.StompDuration);
 			Timer.schedule(new Task() {
 				@Override
 				public void run() {

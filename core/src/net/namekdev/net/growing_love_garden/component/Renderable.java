@@ -12,12 +12,14 @@ public class Renderable extends PooledComponent {
 	public boolean visible = true; 
 	public Type type = Type.Sprite;
 	public TextureRegion sprite;
+	public boolean debugFrame;
 
 	@Override
 	protected void reset() {
 		visible = true;
 		type = Type.Sprite;
 		sprite = null;
+		debugFrame = false;
 	}
 
 	public void setToSprite(TextureRegion texture) {

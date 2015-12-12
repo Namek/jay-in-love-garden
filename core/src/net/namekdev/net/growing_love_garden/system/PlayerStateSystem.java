@@ -67,7 +67,7 @@ public class PlayerStateSystem extends BaseSystem {
 		for (int i = 0, n = trees.size(); i < n; ++i) {
 			int treeId = trees.get(i);
 			
-			if (collisions.checkOverlap(player.getId(), treeId)) {
+			if (collisions.overlapAABB(player.getId(), treeId)) {
 				return treeId;
 			}
 		}

@@ -1,6 +1,7 @@
 package net.namekdev.net.growing_love_garden.system;
 
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
+import net.namekdev.net.growing_love_garden.component.Collider;
 import net.namekdev.net.growing_love_garden.component.Colored;
 import net.namekdev.net.growing_love_garden.component.Origin;
 import net.namekdev.net.growing_love_garden.component.Pos;
@@ -18,8 +19,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Rectangle;
 
 public class RenderSystem extends EntitySystem {
+	M<Collider> mCollider;
 	M<Colored> mColored;
 	M<Origin> mOrigin;
 	M<Pos> mPos;
@@ -28,8 +33,11 @@ public class RenderSystem extends EntitySystem {
 	M<Scale> mScale;
 	
 	CameraSystem cameraSystem;
+	CollisionSystem collisions;
 
 	SpriteBatch batch;
+	ShapeRenderer debugShapes;
+	final Rectangle tmpRect = new Rectangle();
 	
 
 	public RenderSystem() {
@@ -39,6 +47,7 @@ public class RenderSystem extends EntitySystem {
 	@Override
 	protected void initialize() {
 		batch = new SpriteBatch();
+		debugShapes = new ShapeRenderer();
 	}
 
 	@Override
@@ -49,6 +58,7 @@ public class RenderSystem extends EntitySystem {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
+		debugShapes.begin(ShapeType.Line);
 		
 		Bag<Entity> entities = getEntities();
 		Object[] array = entities.getData();
@@ -57,6 +67,7 @@ public class RenderSystem extends EntitySystem {
 		}
 		
 		batch.end();
+		debugShapes.end();
 	}
 
 	protected void process(Entity e) {
@@ -99,6 +110,12 @@ public class RenderSystem extends EntitySystem {
 			float oy = originY*h;
 
 			batch.draw(img, x - ox, y - oy, ox, oy, w, h, scaleX, scaleY, rotation);
+
+			if (renderable.debugFrame && mCollider.has(e)) {
+				collisions.getRect(e.getId(), tmpRect);
+				debugShapes.rect(tmpRect.x, tmpRect.y, tmpRect.width, tmpRect.height);
+				renderable.debugFrame = false;
+			}
 		}
 		else if (renderable.type == Renderable.Type.FrameAnim) {
 			

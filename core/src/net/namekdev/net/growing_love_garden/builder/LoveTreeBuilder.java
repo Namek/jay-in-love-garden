@@ -65,16 +65,16 @@ public class LoveTreeBuilder {
 	public Entity createTree(float x, float y, int z) {
 		Entity treeEntity = world.createEntity();
 		EntityEdit e = treeEntity.edit();
+
+		float treeWidth = treeTex.getRegionWidth();
+		float treeHeight = treeTex.getRegionHeight();
 		
 		e.create(LoveTree.class);
 		e.create(Pos.class).xy(x, y);
+		e.create(Collider.class).wh(treeWidth, treeHeight/2);
 		e.create(ZOrder.class).z = z;
 		e.create(Scale.class);
 		e.create(Renderable.class).setToSprite(treeTex);
-		
-		float treeWidth = treeTex.getRegionWidth();
-		float treeHeight = treeTex.getRegionHeight();
-		float leafHeight = leafTex.getRegionHeight();
 		
 		// init leafs
 		for (int i = 0, n = leafPoints.size(); i < n; ++i) {

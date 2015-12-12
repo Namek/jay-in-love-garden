@@ -10,8 +10,13 @@ public interface C {
 		public static final float NormalMoveSpeed = 8f;
 		public static final float StompDuration = 0.1f;
 		
-		public static final float BucketLeft = 25;
-		public static final float BucketTop = 98;
+		public static final float ColliderBottomWidth = 80;
+		public static final float ColliderBottomHeight = 50;
+	}
+	
+	public interface Bucket {
+		public static final float PosLeft = 25;
+		public static final float PosTop = 98;
 	}
 	
 	public interface Tree {
