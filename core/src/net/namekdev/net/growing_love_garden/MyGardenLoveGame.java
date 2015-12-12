@@ -25,7 +25,8 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 	
 			// loop systems
 			.with(new PlayerStateSystem())
-			.with(new LeafColoringSystem())
+			.with(new LeafLifeSystem())
+			.with(new LeafRenderSystem())
 			.with(new DepthSystem())
 			.with(new RenderSystem())
 			.build();
@@ -35,7 +36,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		world.setDelta(Gdx.graphics.getDeltaTime());
+		world.setDelta(Math.min(1/15f, Gdx.graphics.getDeltaTime()));
 		world.process();
 		
 		if (Gdx.app.getType() == ApplicationType.Desktop) {

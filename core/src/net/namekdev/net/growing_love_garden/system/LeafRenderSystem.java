@@ -4,6 +4,7 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.namekdev.net.growing_love_garden.component.Colored;
 import net.namekdev.net.growing_love_garden.component.LoveLeaf;
 import net.namekdev.net.growing_love_garden.enums.C;
+import net.namekdev.net.growing_love_garden.enums.LeafStadium;
 import net.namekdev.net.growing_love_garden.utils.ActionSequenceTimer;
 
 import com.artemis.Aspect;
@@ -11,7 +12,13 @@ import com.artemis.Entity;
 import com.artemis.EntitySystem;
 import com.artemis.systems.EntityProcessingSystem;
 
-public class LeafColoringSystem extends EntityProcessingSystem {
+/**
+ * System actually sets up the look of leafs,
+ * rendering itself is batched to RenderSystem.
+ * 
+ * @author Namek
+ */
+public class LeafRenderSystem extends EntityProcessingSystem {
 	M<LoveLeaf> mLeaf;
 	M<Colored> mColored;
 	
@@ -21,7 +28,7 @@ public class LeafColoringSystem extends EntityProcessingSystem {
 	);
 
 
-	public LeafColoringSystem() {
+	public LeafRenderSystem() {
 		super(Aspect.all(LoveLeaf.class));
 	}
 
@@ -36,15 +43,29 @@ public class LeafColoringSystem extends EntityProcessingSystem {
 
 	@Override
 	protected void process(Entity e) {
+		LoveLeaf leaf = mLeaf.get(e);
 		Colored col = mColored.get(e);
 		
-		int ai = leafColorTimer.getCurrentActionIndex();
-		float progress = leafColorTimer.getCurrentActionProgress();
-		if (ai == 1) {
-			progress = 1 - progress;
+		if (leaf.justStartedGrowing) {
+			// TODO animate scale tween
+			// TODO would be better as event
 		}
 		
-		float c = progress;
-		col.color.set(c, c, c, 1f);
+		// glow when ready to collect
+		if (leaf.stadium == LeafStadium.Bigger) {
+			int ai = leafColorTimer.getCurrentActionIndex();
+			float progress = leafColorTimer.getCurrentActionProgress();
+			if (ai == 1) {
+				progress = 1 - progress;
+			}
+
+			float c = progress;
+			col.color.set(0, 0.8f + progress/5, 0, 1f);
+		}
+		else {
+			col.color.set(0, 0.8f, 0, 1);
+		}
+		
+		
 	}
 }
