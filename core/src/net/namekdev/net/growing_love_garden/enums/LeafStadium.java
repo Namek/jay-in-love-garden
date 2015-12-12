@@ -28,17 +28,35 @@ public enum LeafStadium {
 	}
 	
 	public boolean isPast(LeafStadium stadium) {
-		int otherIndex = getIndex(stadium);
-		int thisIndex = ordinal();
-		
-		return thisIndex > otherIndex;
+		return ordinal() > getIndex(stadium);
 	}
 	
 	public boolean isInOrPast(LeafStadium stadium) {
-		int otherIndex = getIndex(stadium);
-		int thisIndex = ordinal();
-		
-		return thisIndex >= otherIndex;
+		return ordinal() >= getIndex(stadium);
+	}
+	
+	public boolean isBefore(LeafStadium stadium) {		
+		return ordinal() < getIndex(stadium);
+	}
+	
+	public boolean isInOrBefore(LeafStadium stadium) {		
+		return ordinal() <= getIndex(stadium);
+	}
+	
+	public boolean isBetweenExclusive(LeafStadium left, LeafStadium right) {
+		return isPast(left) && isBefore(right);
+	}
+	
+	public boolean isBetweenInclusive(LeafStadium left, LeafStadium right) {
+		return isMin(left) && isMax(right);
+	}
+	
+	public boolean isMin(LeafStadium stadium) {
+		return isInOrPast(stadium);
+	}
+	
+	public boolean isMax(LeafStadium stadium) {
+		return isInOrBefore(stadium);
 	}
 	
 	private int getIndex(LeafStadium stadium) {

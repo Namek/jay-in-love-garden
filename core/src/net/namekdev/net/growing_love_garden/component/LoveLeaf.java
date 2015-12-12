@@ -8,7 +8,7 @@ public class LoveLeaf extends PooledComponent {
 	public LeafStadium stadium = LeafStadium.None;
 	public boolean stadiumJustChanged = false;
 	public boolean justStartedGrowing;
-	public float growProgress;
+	public float lifeProgress;
 	public float growTempo;
 	public float leftLyingTime;
 
@@ -18,7 +18,7 @@ public class LoveLeaf extends PooledComponent {
 		stadium = LeafStadium.None;
 		stadiumJustChanged = false;
 		justStartedGrowing = false;
-		growProgress = 0;
+		lifeProgress = 0;
 		growTempo = 0;
 		leftLyingTime = 0;
 	}

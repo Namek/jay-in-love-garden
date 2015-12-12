@@ -83,7 +83,7 @@ public class LoveTreeBuilder {
 			EntityEdit te = leaf.edit();
 			
 			float lx = leafInfo.x - treeWidth / 2;
-			float ly = treeHeight - leafInfo.y - leafHeight;
+			float ly = treeHeight - leafInfo.y;
 			
 			te.create(LoveLeaf.class);
 			te.create(PosChild.class).parent = treeEntity.getId();
@@ -92,6 +92,7 @@ public class LoveTreeBuilder {
 			te.create(Renderable.class).setToSprite(leafTex);
 			te.create(Colored.class);
 			te.create(Scale.class);
+			te.create(Origin.class).y = 1;
 		}
 		
 		return treeEntity;

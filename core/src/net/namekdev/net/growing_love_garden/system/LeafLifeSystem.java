@@ -41,9 +41,10 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 			leaf.growTempo = MathUtils.random(C.Leaf.GrowTempoMin, C.Leaf.GrowTempoMax);
 			leaf.justStartedGrowing = true;
 			leaf.setStadium(LeafStadium.Small);
+			leaf.lifeProgress = MathUtils.random(C.Leaf.LifeProgressStartMin, C.Leaf.LifeProgressStartMax);
 		}
 		else if (leaf.stadium.isLiving()) {
-			leaf.growProgress += dt * leaf.growTempo;
+			leaf.lifeProgress += dt * leaf.growTempo;
 			leaf.justStartedGrowing = false;
 		}
 		else if (leaf.stadium == LeafStadium.Lying) {
@@ -54,22 +55,22 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 				pos.x = origPos.x;
 				pos.y = origPos.y;
 				leaf.reset();
-				leaf.stadium = LeafStadium.Small;
+				leaf.stadium = LeafStadium.None;
 			}
 		}
 
 		if (leaf.stadium.isLiving()) {
-			if (leaf.growProgress >= 1f) {
+			if (leaf.lifeProgress >= 1f) {
 				leaf.setStadium(LeafStadium.Falls);
 			}
 			else {
-				if (leaf.growProgress > C.Leaf.Stadium.GettingSmaller) {				
+				if (leaf.lifeProgress > C.Leaf.Stadium.GettingSmaller) {				
 					leaf.setStadium(LeafStadium.GettingSmaller);
 				}
-				else if (leaf.growProgress > C.Leaf.Stadium.GettingYellow) {
+				else if (leaf.lifeProgress > C.Leaf.Stadium.GettingYellow) {
 					leaf.setStadium(LeafStadium.GettingYellow);
 				}
-				else if (leaf.growProgress > C.Leaf.Stadium.Bigger) {
+				else if (leaf.lifeProgress > C.Leaf.Stadium.Bigger) {
 					leaf.setStadium(LeafStadium.Bigger);
 				}
 			}

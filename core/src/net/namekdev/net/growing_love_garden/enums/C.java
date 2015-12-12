@@ -22,8 +22,12 @@ public interface C {
 	public interface Leaf {
 		public static final float GrowTempoMin = 0.04f;
 		public static final float GrowTempoMax = 0.06f;
+		public static final float ScaleYMin = 0.1f;
+		public static final float ScaleYMax = 1f;
 		public static final float FallSpeed = 50f;
 		public static final float LyingDuration = 5f;
+		public static final float LifeProgressStartMin = 0;
+		public static final float LifeProgressStartMax = 0.1f;
 		
 		public interface Stadium {
 			public static final float Bigger = 0.4f;
