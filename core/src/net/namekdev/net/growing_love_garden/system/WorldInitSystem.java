@@ -14,6 +14,7 @@ public class WorldInitSystem extends BaseSystem {
 		factory.createTree(420, 470, 0);
 		factory.createTree(850, 400, 0);
 		factory.createTree(1000, 120, 0);
+		factory.createJay(150, 200);
 	}
 
 	@Override

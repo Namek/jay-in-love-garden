@@ -29,7 +29,7 @@ public class RenderSystem extends EntitySystem {
 	
 
 	public RenderSystem() {
-		super(Aspect.all(Renderable.class, Pos.class, Scale.class));
+		super(Aspect.all(Renderable.class, Pos.class));
 	}
 
 	@Override
@@ -57,7 +57,10 @@ public class RenderSystem extends EntitySystem {
 	protected void process(Entity e) {
 		Renderable renderable = mRenderable.get(e);
 		Pos pos = mPos.get(e);
-		Scale scale = mScale.get(e);
+		Scale scale = mScale.getSafe(e);
+		
+		float scaleX = scale != null ? scale.x : 1f;
+		float scaleY = scale != null ? scale.y : 1f;
 		
 		if (renderable.type == Renderable.Type.Sprite) {
 			TextureRegion img = renderable.sprite;
@@ -81,7 +84,7 @@ public class RenderSystem extends EntitySystem {
 				batch.setColor(Color.WHITE);
 			}
 
-			batch.draw(img, x - w2, y, w2, 0, w, h, scale.x, scale.y, rotation);
+			batch.draw(img, x - w2, y, w2, 0, w, h, scaleX, scaleY, rotation);
 		}
 		else if (renderable.type == Renderable.Type.FrameAnim) {
 			
