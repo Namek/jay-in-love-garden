@@ -10,4 +10,10 @@ public class Scale extends PooledComponent {
 	protected void reset() {
 		x = y = 1;
 	}
+
+	public Scale xy(float x, float y) {
+		this.x = x;
+		this.y = y;
+		return this;
+	}
 }

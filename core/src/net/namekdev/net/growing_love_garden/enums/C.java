@@ -8,6 +8,9 @@ package net.namekdev.net.growing_love_garden.enums;
 public interface C {
 	public interface Player {
 		public static final float NormalMoveSpeed = 8f;
+		
+		public static final float BucketLeft = 25;
+		public static final float BucketTop = 98;
 	}
 	
 	public interface Tree {

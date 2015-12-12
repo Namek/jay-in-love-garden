@@ -2,6 +2,7 @@ package net.namekdev.net.growing_love_garden.system;
 
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.namekdev.net.growing_love_garden.component.Colored;
+import net.namekdev.net.growing_love_garden.component.Origin;
 import net.namekdev.net.growing_love_garden.component.Pos;
 import net.namekdev.net.growing_love_garden.component.PosChild;
 import net.namekdev.net.growing_love_garden.component.Renderable;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class RenderSystem extends EntitySystem {
 	M<Colored> mColored;
+	M<Origin> mOrigin;
 	M<Pos> mPos;
 	M<PosChild> mPosChild;
 	M<Renderable> mRenderable;
@@ -58,15 +60,17 @@ public class RenderSystem extends EntitySystem {
 		Renderable renderable = mRenderable.get(e);
 		Pos pos = mPos.get(e);
 		Scale scale = mScale.getSafe(e);
+		Origin origin = mOrigin.getSafe(e);
 		
 		float scaleX = scale != null ? scale.x : 1f;
 		float scaleY = scale != null ? scale.y : 1f;
+		float originX = origin != null ? origin.x : Origin.DEFAULT_X;
+		float originY = origin != null ? origin.y : Origin.DEFAULT_Y;
 		
 		if (renderable.type == Renderable.Type.Sprite) {
 			TextureRegion img = renderable.sprite;
 			float w = img.getRegionWidth();
 			float h = img.getRegionHeight();
-			float w2 = w / 2;
 			float rotation = 0;
 			
 			float x = pos.x, y = pos.y;
@@ -83,8 +87,11 @@ public class RenderSystem extends EntitySystem {
 			else {
 				batch.setColor(Color.WHITE);
 			}
+			
+			float ox = originX*w;
+			float oy = originY*h;
 
-			batch.draw(img, x - w2, y, w2, 0, w, h, scaleX, scaleY, rotation);
+			batch.draw(img, x - ox, y - oy, ox, oy, w, h, scaleX, scaleY, rotation);
 		}
 		else if (renderable.type == Renderable.Type.FrameAnim) {
 			

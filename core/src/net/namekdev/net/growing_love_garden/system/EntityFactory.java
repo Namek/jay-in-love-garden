@@ -3,6 +3,7 @@ package net.namekdev.net.growing_love_garden.system;
 import net.mostlyoriginal.api.system.core.PassiveSystem;
 import net.namekdev.net.growing_love_garden.builder.LoveTreeBuilder;
 import net.namekdev.net.growing_love_garden.component.*;
+import net.namekdev.net.growing_love_garden.enums.C;
 import net.namekdev.net.growing_love_garden.enums.Tags;
 
 import com.artemis.Entity;
@@ -22,7 +23,7 @@ public class EntityFactory extends PassiveSystem {
 	TextureAtlas textures;
 	
 	LoveTreeBuilder treeBuilder;
-	TextureRegion jayTex;
+	TextureRegion jayTex, bucketTex;
 	
 
 	@Override
@@ -34,6 +35,7 @@ public class EntityFactory extends PassiveSystem {
 		textures = assets.get(TEXTURES_ATLAS);
 		treeBuilder = new LoveTreeBuilder(world, textures);
 		jayTex = textures.findRegion("jay");
+		bucketTex = textures.findRegion("bucket");
 	}
 
 
@@ -43,12 +45,29 @@ public class EntityFactory extends PassiveSystem {
 
 
 	public Entity createJay(float x, float y) {
-		EntityEdit e = world.createEntity().edit();
-		tags.register(Tags.Player, e.getEntity());
+		Entity jay = world.createEntity();
+		EntityEdit e = jay.edit();
+		tags.register(Tags.Player, jay);
 
 		e.create(Pos.class).xy(x, y);
 		e.create(Renderable.class).setToSprite(jayTex);
+		
+		float jayWidth = jayTex.getRegionWidth();
+		float jayHeight = jayTex.getRegionHeight();
+		
+		// bucket
+		Entity bucket = world.createEntity();
+		e = bucket.edit();
+		tags.register(Tags.Bucket, bucket);
+		
+		float bx = C.Player.BucketLeft - jayWidth/2;
+		float by = jayHeight - C.Player.BucketTop;
+		
+		e.create(PosChild.class).parent = jay.getId();
+		e.create(Pos.class).xy(bx, by);
+		e.create(Renderable.class).setToSprite(bucketTex);
+		e.create(Origin.class).xy(0.5f, 1f);
 
-		return e.getEntity();
+		return jay;
 	}
 }
