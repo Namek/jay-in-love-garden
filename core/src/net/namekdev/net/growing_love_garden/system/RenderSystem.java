@@ -13,11 +13,13 @@ import com.artemis.EntitySystem;
 import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.utils.Bag;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class RenderSystem extends EntitySystem {
+	M<Colored> mColored;
 	M<Pos> mPos;
 	M<PosChild> mPosChild;
 	M<Renderable> mRenderable;
@@ -69,6 +71,14 @@ public class RenderSystem extends EntitySystem {
 				Pos parentPos = mPos.get(world.getEntity(mPosChild.get(e).parent));
 				x += parentPos.x;
 				y += parentPos.y;
+			}
+
+			if (mColored.has(e)) {
+				Colored col = mColored.get(e);
+				batch.setColor(col.color);
+			}
+			else {
+				batch.setColor(Color.WHITE);
 			}
 
 			batch.draw(img, x - w2, y, w2, 0, w, h, scale.x, scale.y, rotation);

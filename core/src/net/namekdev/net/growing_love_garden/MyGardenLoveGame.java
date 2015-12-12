@@ -7,12 +7,13 @@ import com.artemis.World;
 import com.artemis.WorldConfiguration;
 import com.artemis.WorldConfigurationBuilder;
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 
 public class MyGardenLoveGame extends ApplicationAdapter {
 	World world;
 	
 	@Override
-	public void create () {
+	public void create() {
 		WorldConfiguration cfg = new WorldConfigurationBuilder()
 			.with(new ExtendedComponentMapperPlugin())
 			.with(new EntityFactory())
@@ -21,6 +22,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 			// loop systems
 			.with(new InputSystem())
 			.with(new PlayerStateSystem())
+			.with(new LeafColoringSystem())
 			.with(new DepthSystem())
 			.with(new RenderSystem())
 			.build();
@@ -29,7 +31,8 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void render () {
+	public void render() {
+		world.setDelta(Gdx.graphics.getDeltaTime());
 		world.process();
 	}
 }
