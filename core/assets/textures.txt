@@ -1,11 +1,18 @@
 textures.png
-size: 283, 271
+size: 293, 271
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-tree
+leaf
   rotate: false
   xy: 0, 0
+  size: 10, 15
+  orig: 10, 15
+  offset: 0, 0
+  index: -1
+tree
+  rotate: false
+  xy: 10, 0
   size: 283, 271
   orig: 283, 271
   offset: 0, 0

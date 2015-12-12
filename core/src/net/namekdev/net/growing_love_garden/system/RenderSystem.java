@@ -1,7 +1,9 @@
 package net.namekdev.net.growing_love_garden.system;
 
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
+import net.namekdev.net.growing_love_garden.component.Colored;
 import net.namekdev.net.growing_love_garden.component.Pos;
+import net.namekdev.net.growing_love_garden.component.PosChild;
 import net.namekdev.net.growing_love_garden.component.Renderable;
 import net.namekdev.net.growing_love_garden.component.Scale;
 
@@ -16,8 +18,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class RenderSystem extends EntitySystem {
-	M<Renderable> mRenderable;
 	M<Pos> mPos;
+	M<PosChild> mPosChild;
+	M<Renderable> mRenderable;
 	M<Scale> mScale;
 
 	SpriteBatch batch;
@@ -60,7 +63,15 @@ public class RenderSystem extends EntitySystem {
 			float h = img.getRegionHeight();
 			float w2 = w / 2;
 			float rotation = 0;
-			batch.draw(img, pos.x - w2, pos.y, w2, 0, w, h, scale.x, scale.y, rotation);
+			
+			float x = pos.x, y = pos.y;
+			if (mPosChild.has(e)) {
+				Pos parentPos = mPos.get(world.getEntity(mPosChild.get(e).parent));
+				x += parentPos.x;
+				y += parentPos.y;
+			}
+
+			batch.draw(img, x - w2, y, w2, 0, w, h, scale.x, scale.y, rotation);
 		}
 		else if (renderable.type == Renderable.Type.FrameAnim) {
 			
