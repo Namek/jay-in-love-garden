@@ -35,10 +35,10 @@ public class PlayerStateSystem extends BaseSystem {
 		Entity e = tags.getEntity(Tags.Player);
 		Pos pos = mPos.get(e);
 
-		int horzDir = input.isKeyPressed(Keys.LEFT) ? -1
-			: input.isKeyPressed(Keys.RIGHT) ? 1 : 0;
-		int vertDir = input.isKeyPressed(Keys.DOWN) ? -1
-				: input.isKeyPressed(Keys.UP) ? 1 : 0;
+		int horzDir = input.isKeyPressed(Keys.LEFT) || input.isKeyPressed(Keys.A) ? -1
+			: input.isKeyPressed(Keys.RIGHT) || input.isKeyPressed(Keys.D) ? 1 : 0;
+		int vertDir = input.isKeyPressed(Keys.DOWN) || input.isKeyPressed(Keys.S) ? -1
+				: input.isKeyPressed(Keys.UP) || input.isKeyPressed(Keys.W) ? 1 : 0;
 		
 		boolean isMoving = horzDir != 0 || vertDir != 0;
 
