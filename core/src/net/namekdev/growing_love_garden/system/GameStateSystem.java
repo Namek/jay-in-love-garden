@@ -42,6 +42,8 @@ public class GameStateSystem extends BaseSystem {
 		if (gameState.yearProgress >= 1f) {
 			gameState.yearProgress = 1f;
 
+			gameState.totalCollectedLove += gameState.getBonus();
+
 			if (gameState.isThereEnoughLove()) {
 				events.dispatch(new WonLevelEvent(gameState));
 			}

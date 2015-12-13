@@ -126,7 +126,11 @@ public class GameScreen extends BaseScreen<GameScreen> {
 
 		// No more levels - You won whole game
 		else {
-			game.pushScreen(new WonGameScreen().init(game));
+			final int earnings = state.totalCollectedLove;
+			TalkSequence talk = Talks.congrats.deepClone()
+				.param("total", earnings);
+
+			game.pushScreen(new TalkScreen(talk, showWinScreen).init(game));
 		}
 	}
 	
@@ -140,6 +144,12 @@ public class GameScreen extends BaseScreen<GameScreen> {
 		public void run() {
 			world.getSystem(GameStateSystem.class).setFirstLevel();
 			game.pushScreen(new InstructionScreen().init(game));
+		}
+	};
+	
+	private Runnable showWinScreen = new Runnable() {
+		public void run() {
+			game.pushScreen(new WonGameScreen().init(game));
 		}
 	};
 }

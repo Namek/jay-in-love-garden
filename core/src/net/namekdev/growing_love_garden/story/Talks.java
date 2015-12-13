@@ -47,4 +47,11 @@ public interface Talks {
 		Talk.c(JAY, RIGHT, "Ready!").smile(),
 		Talk.c(MANAGER, LEFT, "Collect $#{goal}!")
 	);
+	
+	public static final TalkSequence congrats = new TalkSequence(
+		Talk.c(JAY, LEFT, "I did it!").smile(),
+		Talk.c(MANAGER, RIGHT, "You earned $#{total}.").smile(),
+		Talk.c(MANAGER, RIGHT, "I have no more job for you. Thanks for your help.")
+	);
+	
 }
