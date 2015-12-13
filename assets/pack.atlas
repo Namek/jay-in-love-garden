@@ -1,0 +1,97 @@
+
+pack.png
+size: 2048,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bucket
+  rotate: false
+  xy: 1284, 875
+  size: 30, 40
+  orig: 30, 40
+  offset: 0, 0
+  index: -1
+chat_bottom
+  rotate: false
+  xy: 1284, 923
+  size: 400, 64
+  orig: 400, 64
+  offset: 0, 0
+  index: -1
+chat_middle
+  rotate: false
+  xy: 1284, 917
+  size: 400, 4
+  orig: 400, 4
+  offset: 0, 0
+  index: -1
+chat_top
+  rotate: false
+  xy: 2, 158
+  size: 400, 7
+  orig: 400, 7
+  offset: 0, 0
+  index: -1
+heart
+  rotate: false
+  xy: 1089, 244
+  size: 10, 15
+  orig: 10, 15
+  offset: 0, 0
+  index: -1
+horizon
+  rotate: false
+  xy: 2, 769
+  size: 1280, 218
+  orig: 1280, 218
+  offset: 0, 0
+  index: -1
+instruction
+  rotate: false
+  xy: 2, 167
+  size: 800, 600
+  orig: 800, 600
+  offset: 0, 0
+  index: -1
+jay
+  rotate: false
+  xy: 1089, 261
+  size: 119, 154
+  orig: 119, 154
+  offset: 0, 0
+  index: -1
+leaf
+  rotate: false
+  xy: 1210, 400
+  size: 10, 15
+  orig: 10, 15
+  offset: 0, 0
+  index: -1
+manager
+  rotate: false
+  xy: 2, 2
+  size: 119, 154
+  orig: 119, 154
+  offset: 0, 0
+  index: -1
+smile
+  rotate: false
+  xy: 1686, 929
+  size: 119, 58
+  orig: 119, 58
+  offset: 0, 0
+  index: -1
+thanks
+  rotate: false
+  xy: 804, 417
+  size: 500, 350
+  orig: 500, 350
+  offset: 0, 0
+  index: -1
+tree
+  rotate: false
+  xy: 804, 144
+  size: 283, 271
+  orig: 283, 271
+  offset: 0, 0
+  index: -1
