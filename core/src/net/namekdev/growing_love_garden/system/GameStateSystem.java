@@ -77,6 +77,11 @@ public class GameStateSystem extends BaseSystem {
 		leafLifeSystem.resetAllLeafs();
 	}
 
+	public void setFirstLevel() {
+		gameState.reset();
+		leafLifeSystem.resetAllLeafs();
+	}
+
 	@Subscribe
 	private void onLeafVacuumed(LeafVacuumedEvent evt) {
 		int value = valueLeaf(evt.leafId);

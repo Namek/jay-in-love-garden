@@ -15,7 +15,7 @@ public class GameState extends PooledComponent {
 
 
 	@Override
-	protected void reset() {
+	public void reset() {
 		collectedLove = loveGoal = totalCollectedLove = 0;
 		levelIndex = 0;
 		yearProgress = 0;

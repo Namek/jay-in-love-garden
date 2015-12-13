@@ -97,7 +97,13 @@ public class GameScreen extends BaseScreen<GameScreen> {
 	
 	@Subscribe
 	private void onLostGame(LostGameEvent evt) {
-		game.pushScreen(new GameOverScreen(evt.state).init(game));
+		final GameState state = evt.state;
+		final int earnings = state.totalCollectedLove;
+
+		TalkSequence talk = (earnings > 0 ? Talks.lost : Talks.lostZero).deepClone()
+			.param("sum", earnings);
+
+		game.pushScreen(new TalkScreen(talk, setFirstLevel).init(game));
 	}
 	
 	@Subscribe
@@ -127,6 +133,13 @@ public class GameScreen extends BaseScreen<GameScreen> {
 	private Runnable setNextLevel = new Runnable() {
 		public void run() {
 			world.getSystem(GameStateSystem.class).setNextLevel();
+		}
+	};
+	
+	private Runnable setFirstLevel = new Runnable() {
+		public void run() {
+			world.getSystem(GameStateSystem.class).setFirstLevel();
+			game.pushScreen(new InstructionScreen().init(game));
 		}
 	};
 }
