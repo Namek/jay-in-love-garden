@@ -117,7 +117,7 @@ public class TalkScreen extends BaseScreen<TalkScreen> {
 		batch.end();
 
 
-		if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+		if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			setNextOrExit();
 		}
 	}

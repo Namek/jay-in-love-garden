@@ -14,7 +14,7 @@ public class InstructionScreen extends BaseScreen<InstructionScreen> {
 		batch.draw(assets.instruction, x, y);
 		batch.end();
 
-		if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+		if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			popScreen();
 		}
 	}
