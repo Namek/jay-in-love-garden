@@ -9,4 +9,8 @@ public class SchedulerSystem extends net.mostlyoriginal.api.system.SchedulerSyst
 		Entity e = world.createEntity();
 		mSchedule.create(e).operation.add(operation);
 	}
+	
+	public void schedule(Entity e, Operation operation) {
+		mSchedule.create(e).operation.add(operation);
+	}
 }
