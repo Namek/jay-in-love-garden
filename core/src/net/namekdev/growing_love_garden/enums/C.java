@@ -8,6 +8,8 @@ package net.namekdev.growing_love_garden.enums;
 public interface C {
 	public interface Player {
 		public static final float NormalMoveSpeed = 8f;
+		public static final float WalkStepDuration = 0.1f;
+		public static final float WalkRotation = 3.5f;
 		public static final float StompDuration = 0.1f;
 		public static final float StompCooldown = 0.7f;
 		

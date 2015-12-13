@@ -44,6 +44,7 @@ public class EntityFactory extends PassiveSystem {
 		e.create(Collider.class).wh(C.Player.ColliderBottomWidth, C.Player.ColliderBottomHeight);
 		e.create(Renderable.class).setToSprite(assets.jayTex);
 		e.create(Scale.class);
+		e.create(Rotation.class);
 		
 		// bucket
 		Entity bucket = world.createEntity();

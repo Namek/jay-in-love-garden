@@ -4,6 +4,8 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.namekdev.growing_love_garden.component.Pos;
 import net.namekdev.growing_love_garden.enums.C;
 import net.namekdev.growing_love_garden.enums.Tags;
+import net.namekdev.growing_love_garden.utils.ActionTimer;
+import net.namekdev.growing_love_garden.utils.ActionTimer.TimerState;
 import net.namekdev.growing_love_garden.component.*;
 
 import com.artemis.Aspect;
@@ -21,6 +23,7 @@ import com.badlogic.gdx.Input;
 
 public class PlayerStateSystem extends BaseSystem {
 	M<Pos> mPos;
+	M<Rotation> mRotation;
 	M<Scale> mScale;
 	
 	AspectHelpers aspects;
@@ -29,6 +32,8 @@ public class PlayerStateSystem extends BaseSystem {
 	PlayerStompSystem stompSystem;
 	
 	Input input;
+	
+	ActionTimer walkTimer = new ActionTimer(C.Player.WalkStepDuration);
 
 
 	@Override
@@ -38,8 +43,11 @@ public class PlayerStateSystem extends BaseSystem {
 
 	@Override
 	protected void processSystem() {
+		float dt = world.getDelta();
+		
 		Entity e = tags.getEntity(Tags.Player);
 		Pos pos = mPos.get(e);
+		Rotation rot = mRotation.get(e);
 		Scale scale = mScale.get(e);
 
 		int horzDir = input.isKeyPressed(Keys.LEFT) || input.isKeyPressed(Keys.A) ? -1
@@ -61,7 +69,14 @@ public class PlayerStateSystem extends BaseSystem {
 		}
 
 		if (isMoving) {
-			// TODO animate walk
+			if (walkTimer.update(dt) != TimerState.Active) {
+				walkTimer.start();
+			}
+
+			rot.rotation = C.Player.WalkRotation * (walkTimer.isForward(0.5f) ? 1 : -1);
+		}
+		else {
+			rot.rotation = 0;
 		}
 		
 		if (input.isKeyJustPressed(Keys.SPACE)) {

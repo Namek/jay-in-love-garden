@@ -7,6 +7,7 @@ import net.namekdev.growing_love_garden.component.Origin;
 import net.namekdev.growing_love_garden.component.Pos;
 import net.namekdev.growing_love_garden.component.PosChild;
 import net.namekdev.growing_love_garden.component.Renderable;
+import net.namekdev.growing_love_garden.component.Rotation;
 import net.namekdev.growing_love_garden.component.Scale;
 import net.namekdev.growing_love_garden.enums.C;
 
@@ -31,6 +32,7 @@ public class RenderSystem extends EntitySystem {
 	M<Pos> mPos;
 	M<PosChild> mPosChild;
 	M<Renderable> mRenderable;
+	M<Rotation> mRotation;
 	M<Scale> mScale;
 	
 	CameraSystem cameraSystem;
@@ -103,6 +105,7 @@ public class RenderSystem extends EntitySystem {
 		Pos pos = mPos.get(e);
 		Scale scale = mScale.getSafe(e);
 		Origin origin = mOrigin.getSafe(e);
+		Rotation rot = mRotation.getSafe(e);
 		
 		if (!renderable.visible) {
 			return;
@@ -112,12 +115,12 @@ public class RenderSystem extends EntitySystem {
 		float scaleY = scale != null ? scale.y : 1f;
 		float originX = origin != null ? origin.x : Origin.DEFAULT_X;
 		float originY = origin != null ? origin.y : Origin.DEFAULT_Y;
+		float rotation = rot != null ? rot.rotation : 0;
 		
 		if (renderable.type == Renderable.Type.Sprite) {
 			TextureRegion img = renderable.sprite;
 			float w = img.getRegionWidth();
 			float h = img.getRegionHeight();
-			float rotation = 0;
 			
 			float x = pos.x, y = pos.y;
 			if (mPosChild.has(e)) {
