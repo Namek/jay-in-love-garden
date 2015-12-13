@@ -35,7 +35,7 @@ public class RenderSystem extends EntitySystem {
 	CollisionSystem collisions;
 
 	SpriteBatch batch;
-	ShapeRenderer debugShapes;
+	ShapeRenderer shapes;
 	final Rectangle tmpRect = new Rectangle();
 	
 
@@ -46,7 +46,7 @@ public class RenderSystem extends EntitySystem {
 	@Override
 	protected void initialize() {
 		batch = new SpriteBatch();
-		debugShapes = new ShapeRenderer();
+		shapes = new ShapeRenderer();
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class RenderSystem extends EntitySystem {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
-		debugShapes.begin(ShapeType.Line);
+		shapes.begin(ShapeType.Line);
 		
 		Bag<Entity> entities = getEntities();
 		Object[] array = entities.getData();
@@ -66,7 +66,7 @@ public class RenderSystem extends EntitySystem {
 		}
 		
 		batch.end();
-		debugShapes.end();
+		shapes.end();
 	}
 
 	protected void process(Entity e) {
@@ -112,7 +112,7 @@ public class RenderSystem extends EntitySystem {
 
 			if (renderable.debugFrame && mCollider.has(e)) {
 				collisions.getRect(e.getId(), tmpRect);
-				debugShapes.rect(tmpRect.x, tmpRect.y, tmpRect.width, tmpRect.height);
+				shapes.rect(tmpRect.x, tmpRect.y, tmpRect.width, tmpRect.height);
 				renderable.debugFrame = false;
 			}
 		}

@@ -60,7 +60,7 @@ public interface C {
 	}
 	
 	public interface Levels {
-		public static final int Goal1 = 10000; 
-		public static final int Goal2 = 20000; 
+		public static final int[] Goal = new int[] { 10000, 23000, 35000 };
+		public static final float[] YearProgressingSpeed = new float[] { 0.017f, 0.007f, 0.005f };
 	}
 }

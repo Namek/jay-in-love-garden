@@ -2,17 +2,17 @@ package net.namekdev.net.growing_love_garden.system;
 
 import net.mostlyoriginal.api.event.common.Subscribe;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
-import net.mostlyoriginal.api.system.core.PassiveSystem;
 import net.namekdev.net.growing_love_garden.component.GameState;
 import net.namekdev.net.growing_love_garden.component.LoveLeaf;
 import net.namekdev.net.growing_love_garden.enums.C;
 import net.namekdev.net.growing_love_garden.enums.LeafLifeStadium;
 import net.namekdev.net.growing_love_garden.event.LeafVacuumedEvent;
 
+import com.artemis.BaseSystem;
 import com.artemis.EntityEdit;
 import com.artemis.managers.TagManager;
 
-public class GameStateSystem extends PassiveSystem {
+public class GameStateSystem extends BaseSystem {
 	M<GameState> mGameState;
 	M<LoveLeaf> mLeaf;
 
@@ -25,7 +25,13 @@ public class GameStateSystem extends PassiveSystem {
 	protected void initialize() {
 		EntityEdit e = world.createEntity().edit();
 		gameState = e.create(GameState.class);
-		gameState.loveGoal = C.Levels.Goal1;
+		gameState.loveGoal = C.Levels.Goal[gameState.levelIndex];
+	}
+
+	@Override
+	protected void processSystem() {
+		float dt = world.getDelta();
+		gameState.yearProgress += dt * C.Levels.YearProgressingSpeed[gameState.levelIndex];
 	}
 
 	public int valueLeaf(LoveLeaf leaf) {
