@@ -15,6 +15,18 @@ public class Utils {
 		
 		return newBag;
 	}
+
+	public static Integer[] cloneIntBagToArray(IntBag bag) {
+		int n = bag.size();
+		Integer[] arr = new Integer[n];
+		int data[] = bag.getData();
+		
+		for (int i = 0; i < n; ++i) {
+			arr[i] = data[i]; 
+		}
+		
+		return arr;
+	}
 	
 	public static IntBag filterBag(IntBag bag, IntBagPredicate predicate) {
 		int n = bag.size();

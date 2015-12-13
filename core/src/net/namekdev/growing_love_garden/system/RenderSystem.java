@@ -12,9 +12,11 @@ import net.namekdev.growing_love_garden.component.Scale;
 import net.namekdev.growing_love_garden.enums.C;
 
 import com.artemis.Aspect;
+import com.artemis.BaseSystem;
 import com.artemis.Entity;
 import com.artemis.EntitySystem;
 import com.artemis.utils.Bag;
+import com.artemis.utils.IntBag;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -25,7 +27,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.NumberUtils;
 
-public class RenderSystem extends EntitySystem {
+/**
+ * Renders entities that are sorted by {@link DepthSystem}.
+ * 
+ * @author Namek
+ */
+public class RenderSystem extends BaseSystem {
 	M<Collider> mCollider;
 	M<Colored> mColored;
 	M<Origin> mOrigin;
@@ -37,20 +44,18 @@ public class RenderSystem extends EntitySystem {
 	
 	CameraSystem cameraSystem;
 	CollisionSystem collisions;
+	DepthSystem depthSystem;//companion system
 	EntityFactory entityFactory;
 
 	SpriteBatch batch;
 	ShapeRenderer shapes;
+	
 	final Rectangle tmpRect = new Rectangle();
 	
 	private Color skyColor = new Color(0x7F99FFFF);
 	private Color grassColor = new Color(0x55CC45FF);
 	private Color nearGrassColor = new Color(0x05CC45FF);
-	
 
-	public RenderSystem() {
-		super(Aspect.all(Renderable.class, Pos.class));
-	}
 
 	@Override
 	protected void initialize() {
@@ -90,17 +95,17 @@ public class RenderSystem extends EntitySystem {
 		
 		// then render all the other things
 		shapes.begin(ShapeType.Line);
-		Bag<Entity> entities = getEntities();
-		Object[] array = entities.getData();
-		for (int i = 0, s = entities.size(); s > i; i++) {
-			process((Entity) array[i]);
-		}
 		
+		Integer[] entities = depthSystem.sortedEntities;
+		for (int i = 0, n = entities.length; i < n; i++) {
+			process(entities[i]);
+		}
+
 		batch.end();
 		shapes.end();
 	}
 
-	protected void process(Entity e) {
+	protected void process(int e) {
 		Renderable renderable = mRenderable.get(e);
 		Pos pos = mPos.get(e);
 		Scale scale = mScale.getSafe(e);
@@ -143,7 +148,7 @@ public class RenderSystem extends EntitySystem {
 			batch.draw(img, x - ox, y - oy, ox, oy, w, h, scaleX, scaleY, rotation);
 
 			if (renderable.debugFrame && mCollider.has(e)) {
-				collisions.getRect(e.getId(), tmpRect);
+				collisions.getRect(e, tmpRect);
 				shapes.rect(tmpRect.x, tmpRect.y, tmpRect.width, tmpRect.height);
 				renderable.debugFrame = false;
 			}

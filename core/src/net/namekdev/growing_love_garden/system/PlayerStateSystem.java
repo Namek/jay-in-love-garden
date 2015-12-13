@@ -8,15 +8,10 @@ import net.namekdev.growing_love_garden.utils.ActionTimer;
 import net.namekdev.growing_love_garden.utils.ActionTimer.TimerState;
 import net.namekdev.growing_love_garden.component.*;
 
-import com.artemis.Aspect;
 import com.artemis.BaseSystem;
-import com.artemis.ComponentMapper;
 import com.artemis.Entity;
-import com.artemis.EntitySystem;
 import com.artemis.managers.TagManager;
-import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.utils.IntBag;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -25,9 +20,11 @@ public class PlayerStateSystem extends BaseSystem {
 	M<Pos> mPos;
 	M<Rotation> mRotation;
 	M<Scale> mScale;
+	M<ZOrder> mZOrder;
 	
 	AspectHelpers aspects;
 	CollisionSystem collisions;
+	DepthSystem depthSystem;
 	TagManager tags;
 	PlayerStompSystem stompSystem;
 	
@@ -49,12 +46,13 @@ public class PlayerStateSystem extends BaseSystem {
 		Pos pos = mPos.get(e);
 		Rotation rot = mRotation.get(e);
 		Scale scale = mScale.get(e);
+		ZOrder z = mZOrder.get(e);
 
 		int horzDir = input.isKeyPressed(Keys.LEFT) || input.isKeyPressed(Keys.A) ? -1
 			: input.isKeyPressed(Keys.RIGHT) || input.isKeyPressed(Keys.D) ? 1 : 0;
 		int vertDir = input.isKeyPressed(Keys.DOWN) || input.isKeyPressed(Keys.S) ? -1
 				: input.isKeyPressed(Keys.UP) || input.isKeyPressed(Keys.W) ? 1 : 0;
-		
+
 		boolean isMoving = horzDir != 0 || vertDir != 0;
 
 		pos.x += C.Player.NormalMoveSpeed * horzDir;
@@ -74,6 +72,8 @@ public class PlayerStateSystem extends BaseSystem {
 			}
 
 			rot.rotation = C.Player.WalkRotation * (walkTimer.isForward(0.5f) ? 1 : -1);
+			z.z = (int) pos.y;
+			depthSystem.dirtyOrder = true;
 		}
 		else {
 			rot.rotation = 0;

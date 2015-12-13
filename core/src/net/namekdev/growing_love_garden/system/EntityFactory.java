@@ -45,8 +45,10 @@ public class EntityFactory extends PassiveSystem {
 		e.create(Renderable.class).setToSprite(assets.jayTex);
 		e.create(Scale.class);
 		e.create(Rotation.class);
+		e.create(ZOrder.class);
 		
 		// bucket
+		/*
 		Entity bucket = world.createEntity();
 		e = bucket.edit();
 		tags.register(Tags.Bucket, bucket);
@@ -58,6 +60,8 @@ public class EntityFactory extends PassiveSystem {
 		e.create(Pos.class).xy(bx, by);
 		e.create(Renderable.class).setToSprite(assets.bucketTex);
 		e.create(Origin.class).xy(0.5f, 1f);
+		e.create(ZOrder.class);
+		*/
 
 		return jay;
 	}

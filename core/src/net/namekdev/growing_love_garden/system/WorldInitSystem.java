@@ -11,11 +11,11 @@ public class WorldInitSystem extends BaseSystem {
 	
 
 	private void init() {
-		factory.createTree(150, 200, 0);
-		factory.createTree(450, 100, 0);
-		factory.createTree(420, 470, 0);
-		factory.createTree(850, 400, 0);
-		factory.createTree(1000, 120, 0);
+		factory.createTree(150, 200, 200);
+		factory.createTree(450, 100, 100);
+		factory.createTree(420, 470, 470);
+		factory.createTree(850, 400, 400);
+		factory.createTree(1000, 120, 120);
 		factory.createJay(150, 200);
 	}
 
