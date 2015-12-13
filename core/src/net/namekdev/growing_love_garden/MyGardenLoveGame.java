@@ -4,7 +4,8 @@ import java.util.Stack;
 
 import net.namekdev.growing_love_garden.screen.BaseScreen;
 import net.namekdev.growing_love_garden.screen.GameScreen;
-import net.namekdev.growing_love_garden.screen.TutorialScreen;
+import net.namekdev.growing_love_garden.screen.TalkScreen;
+import net.namekdev.growing_love_garden.story.Talks;
 import net.namekdev.growing_love_garden.system.*;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -13,7 +14,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 
 public class MyGardenLoveGame extends ApplicationAdapter {
-	private Stack<BaseScreen> screenStack = new Stack<BaseScreen>();
+	private Stack<BaseScreen<?>> screenStack = new Stack<BaseScreen<?>>();
 	private GameScreen gameScreen;
 	private Assets assets;
 
@@ -25,7 +26,13 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 		gameScreen = new GameScreen().init(this);
 
 		pushScreen(gameScreen);
-//		pushScreen(new TutorialScreen(this));
+
+		gameScreen.render(0f);
+		pushScreen(new TalkScreen(Talks.tutorialTalk, new Runnable() {
+			public void run() {
+				
+			}
+		}).init(this));
 	}
 
 	@Override
@@ -44,7 +51,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 		}
 	}
 
-	public void popScreen(BaseScreen screen) {
+	public void popScreen(BaseScreen<?> screen) {
 		if (screenStack.peek() != screen) {
 			throw new RuntimeException("Popping another screen.");
 		}
@@ -53,7 +60,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 		screen.dispose();
 	}
 	
-	public void pushScreen(BaseScreen screen) {
+	public void pushScreen(BaseScreen<?> screen) {
 		screenStack.push(screen);
 	}
 
