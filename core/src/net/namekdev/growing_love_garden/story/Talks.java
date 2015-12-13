@@ -21,7 +21,7 @@ public interface Talks {
 	
 	public static final TalkSequence lost = new TalkSequence(
 		Talk.c(MANAGER, LEFT, "I told you not to stomp too often, didn't I?"),
-		Talk.c(MANAGER, LEFT, "You earned #{sum}. Go home."),
+		Talk.c(MANAGER, LEFT, "You earned $#{sum}. Go home."),
 		Talk.c(MANAGER, LEFT, "And next time work harder!")
 	);
 	
