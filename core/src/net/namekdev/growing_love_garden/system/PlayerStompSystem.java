@@ -6,6 +6,7 @@ import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.event.common.Subscribe;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.namekdev.growing_love_garden.component.LoveLeaf;
+import net.namekdev.growing_love_garden.component.Renderable;
 import net.namekdev.growing_love_garden.enums.C;
 import net.namekdev.growing_love_garden.enums.LeafLifeStadium;
 import net.namekdev.growing_love_garden.enums.LeafPositionState;
@@ -18,6 +19,7 @@ import com.artemis.utils.IntBag;
 
 public class PlayerStompSystem extends BaseSystem {
 	M<LoveLeaf> mLeaf;
+	M<Renderable> mRenderable;
 	M<Schedule> mSchedule;
 	
 	CameraSystem cameraSystem;
@@ -91,5 +93,8 @@ public class PlayerStompSystem extends BaseSystem {
 		LoveLeaf leaf = mLeaf.get(evt.leafId);
 		leaf.state = LeafPositionState.Lying;
 		leaf.stadium = LeafLifeStadium.None;
+
+		Renderable renderable = mRenderable.get(evt.leafId);
+		renderable.visible = false;
 	}
 }
