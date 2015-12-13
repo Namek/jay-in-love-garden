@@ -105,8 +105,8 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 				leaf.setState(LeafPositionState.Falls);
 				leaf.fallSpeed = C.Leaf.StompFallSpeed;
 			}
-			else {
-				leaf.lifeProgress = C.Leaf.Stadium.GettingYellow;
+			else if (leaf.stadium == LeafLifeStadium.Small) {
+				leaf.lifeProgress = C.Leaf.Stadium.GettingSmaller;
 			}
 		}
 		
