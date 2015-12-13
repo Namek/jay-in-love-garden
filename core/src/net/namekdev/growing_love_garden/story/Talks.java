@@ -32,14 +32,14 @@ public interface Talks {
 	);
 	
 	public static final TalkSequence nextLevel = new TalkSequence(
-		Talk.c(MANAGER, RIGHT, "Good! You collected $#{bonus} bonus."),
+		Talk.c(MANAGER, RIGHT, "Good! You collected $#{bonus} extra."),
 		Talk.c(MANAGER, RIGHT, "That's yours!"),
 		Talk.c(JAY, LEFT, ":-)").smile(),
 		Talk.c(MANAGER, RIGHT, "Your next goal is to collect $#{goal}. Good luck!")
 	);
 	
 	public static final TalkSequence finalMission = new TalkSequence(
-		Talk.c(MANAGER, LEFT, "Amazing! $#{bonus} bonus and it is yours again.").smile(),
+		Talk.c(MANAGER, LEFT, "Amazing! $#{bonus} extra and it is yours again.").smile(),
 		Talk.c(JAY, RIGHT, "\\o/"),
 		Talk.c(MANAGER, LEFT, "It's your final mission. Are you ready?"),
 		Talk.c(JAY, RIGHT, "Uuumm...").dontWaitForClick(1f),
