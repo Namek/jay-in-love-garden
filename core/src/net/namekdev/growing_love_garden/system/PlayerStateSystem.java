@@ -21,6 +21,7 @@ import com.badlogic.gdx.Input;
 
 public class PlayerStateSystem extends BaseSystem {
 	M<Pos> mPos;
+	M<Scale> mScale;
 	
 	AspectHelpers aspects;
 	CollisionSystem collisions;
@@ -39,6 +40,7 @@ public class PlayerStateSystem extends BaseSystem {
 	protected void processSystem() {
 		Entity e = tags.getEntity(Tags.Player);
 		Pos pos = mPos.get(e);
+		Scale scale = mScale.get(e);
 
 		int horzDir = input.isKeyPressed(Keys.LEFT) || input.isKeyPressed(Keys.A) ? -1
 			: input.isKeyPressed(Keys.RIGHT) || input.isKeyPressed(Keys.D) ? 1 : 0;
@@ -53,9 +55,11 @@ public class PlayerStateSystem extends BaseSystem {
 		if (pos.y > C.World.TopHorizonCollisionBottom) {
 			pos.y = C.World.TopHorizonCollisionBottom;
 		}
-		
-		// TODO flip vertically if horzDir == 1
-		
+
+		if (scale.x * horzDir > 0) {
+			scale.x *= -1f;
+		}
+
 		if (isMoving) {
 			// TODO animate walk
 		}
