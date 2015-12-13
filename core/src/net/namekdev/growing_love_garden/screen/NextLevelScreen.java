@@ -1,13 +1,11 @@
 package net.namekdev.growing_love_garden.screen;
 
-import net.namekdev.growing_love_garden.MyGardenLoveGame;
 import net.namekdev.growing_love_garden.component.GameState;
 
-public class NextLevelScreen extends BaseScreen {
+public class NextLevelScreen extends BaseScreen<NextLevelScreen> {
 	GameState state;
 
-	public NextLevelScreen(MyGardenLoveGame game, GameState state) {
-		super(game);
+	public NextLevelScreen(GameState state) {
 		this.state = state;
 	}
 

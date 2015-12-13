@@ -1,27 +1,27 @@
 textures.png
-size: 442, 271
+size: 663, 496
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-bucket
+leaf
   rotate: false
   xy: 0, 0
+  size: 10, 15
+  orig: 10, 15
+  offset: 0, 0
+  index: -1
+bucket
+  rotate: false
+  xy: 10, 0
   size: 30, 40
   orig: 30, 40
   offset: 0, 0
   index: -1
 jay
   rotate: false
-  xy: 30, 0
+  xy: 40, 0
   size: 119, 154
   orig: 119, 154
-  offset: 0, 0
-  index: -1
-leaf
-  rotate: false
-  xy: 149, 0
-  size: 10, 15
-  orig: 10, 15
   offset: 0, 0
   index: -1
 tree
@@ -29,5 +29,26 @@ tree
   xy: 159, 0
   size: 283, 271
   orig: 283, 271
+  offset: 0, 0
+  index: -1
+chat_middle
+  rotate: false
+  xy: 0, 271
+  size: 663, 154
+  orig: 663, 154
+  offset: 0, 0
+  index: -1
+chat_bottom
+  rotate: false
+  xy: 0, 425
+  size: 663, 64
+  orig: 663, 64
+  offset: 0, 0
+  index: -1
+chat_top
+  rotate: false
+  xy: 0, 489
+  size: 663, 7
+  orig: 663, 7
   offset: 0, 0
   index: -1

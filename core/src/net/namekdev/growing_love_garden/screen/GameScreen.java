@@ -31,17 +31,20 @@ import com.artemis.WorldConfigurationBuilder;
 import com.artemis.managers.TagManager;
 import com.artemis.utils.Bag;
 
-public class GameScreen extends BaseScreen {
+public class GameScreen extends BaseScreen<GameScreen> {
 	World world;
 	public boolean isPaused;
 
-	public GameScreen(MyGardenLoveGame game) {
-		super(game);
+	public GameScreen init(MyGardenLoveGame game) {
+		super.init(game);
+
+		EntityFactory entityFactory = new EntityFactory();
+		entityFactory.assets = game.getAssets();
 
 		WorldConfiguration cfg = new WorldConfigurationBuilder()
 			.with(new ExtendedComponentMapperPlugin())
 			.with(new AspectHelpers())
-			.with(new EntityFactory())
+			.with(entityFactory)
 			.with(new WorldInitSystem())
 			.with(new TagManager())
 	
@@ -75,9 +78,11 @@ public class GameScreen extends BaseScreen {
 				}
 			}
 		});
-	
+
 		world = new World(cfg);
 		world.getSystem(EventSystem.class).registerEvents(this);
+		
+		return this;
 	}
 
 	@Override
@@ -88,11 +93,11 @@ public class GameScreen extends BaseScreen {
 	
 	@Subscribe
 	private void onLostGame(LostGameEvent evt) {
-		game.pushScreen(new GameOverScreen(game, evt.state));
+		game.pushScreen(new GameOverScreen(evt.state).init(game));
 	}
 	
 	@Subscribe
 	private void onWonGame(WonLevelEvent evt) {
-		game.pushScreen(new NextLevelScreen(game, evt.state));
+		game.pushScreen(new NextLevelScreen(evt.state).init(game));
 	}
 }

@@ -15,11 +15,14 @@ import com.badlogic.gdx.Input.Keys;
 public class MyGardenLoveGame extends ApplicationAdapter {
 	private Stack<BaseScreen> screenStack = new Stack<BaseScreen>();
 	private GameScreen gameScreen;
+	private Assets assets;
 
 	
 	@Override
 	public void create() {
-		gameScreen = new GameScreen(this);
+		assets = new Assets();
+		assets.loadAll();
+		gameScreen = new GameScreen().init(this);
 
 		pushScreen(gameScreen);
 //		pushScreen(new TutorialScreen(this));
@@ -56,5 +59,9 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 
 	public GameScreen getGameScreen() {
 		return gameScreen;
+	}
+	
+	public Assets getAssets() {
+		return assets;
 	}
 }
