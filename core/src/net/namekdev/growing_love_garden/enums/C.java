@@ -29,7 +29,7 @@ public interface C {
 		public static final float GrowTempoMin = 0.04f;
 		public static final float GrowTempoMax = 0.08f;
 		public static final float ScaleYMin = 0.1f;
-		public static final float ScaleYMax = 1f;
+		public static final float ScaleYMax = 1.2f;
 		public static final float NaturalFallSpeed = 50f;
 		public static final float StompFallSpeed = 80f;
 		public static final float LyingDuration = 5f;
@@ -41,7 +41,7 @@ public interface C {
 		public static final float VacuumDisappearDistance = 25;
 		
 		public interface Stadium {
-			public static final float Bigger = 0.4f;
+			public static final float Bigger = 0.5f;
 			public static final float GettingYellow = 0.8f;
 			public static final float GettingSmaller = 0.9f;
 		}
@@ -66,6 +66,6 @@ public interface C {
 	
 	public interface Levels {
 		public static final int[] Goal = new int[] { 1000, 10000, 23000, 35000 };
-		public static final float[] YearProgressingSpeed = new float[] { 0.09f, 0.017f, 0.007f, 0.005f };
+		public static final float[] YearProgressingSpeed = new float[] { 0.09f, 0.008f, 0.0035f, 0.0025f };
 	}
 }

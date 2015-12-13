@@ -94,7 +94,7 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 		renderable.visible = leaf.stadium != LeafLifeStadium.None;
 	}
 
-	public IntBag detachLeafs(int treeId) {
+	public IntBag detachLeafsOrMakeOlder(int treeId) {
 		IntBag leafs = aspects.getLeafs(treeId);
 		
 		for (int i = 0, n = leafs.size(); i < n; ++i) {
@@ -104,6 +104,9 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 			if (canDetachLeaf(leaf)) {
 				leaf.setState(LeafPositionState.Falls);
 				leaf.fallSpeed = C.Leaf.StompFallSpeed;
+			}
+			else {
+				leaf.lifeProgress = C.Leaf.Stadium.GettingYellow;
 			}
 		}
 		

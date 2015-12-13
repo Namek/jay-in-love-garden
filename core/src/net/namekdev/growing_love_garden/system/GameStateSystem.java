@@ -20,6 +20,7 @@ public class GameStateSystem extends BaseSystem {
 	M<LoveLeaf> mLeaf;
 
 	EventSystem events;
+	LeafLifeSystem leafLifeSystem;
 	TagManager tags;
 
 	public GameState gameState;
@@ -72,6 +73,8 @@ public class GameStateSystem extends BaseSystem {
 		gameState.collectedLove = 0;
 		gameState.loveGoal = C.Levels.Goal[level];
 		gameState.yearProgress = 0;
+		
+		leafLifeSystem.resetAllLeafs();
 	}
 
 	@Subscribe

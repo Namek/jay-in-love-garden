@@ -29,7 +29,6 @@ public class PlayerStompSystem extends BaseSystem {
 	
 	float stompProgress = 0;
 	boolean stompBlocked = false;
-	int treeId;
 
 
 	@Override
@@ -56,12 +55,10 @@ public class PlayerStompSystem extends BaseSystem {
 		stompProgress = 0;
 		cameraSystem.shake(C.Player.StompDuration);
 
-		this.treeId = treeId;
-
 		scheduler.schedule(
 			delayedOperation(C.World.TimeToDetachLeafs, new Runnable() {
 				public void run() {
-					IntBag leafs = leafLifeSystem.detachLeafs(treeId);
+					IntBag leafs = leafLifeSystem.detachLeafsOrMakeOlder(treeId);
 					IntBag valuableLeafs = Utils.filterBag(leafs, new IntBagPredicate() {
 						public boolean apply(int e) {
 							return gameState.valueLeaf(e) > 0;
