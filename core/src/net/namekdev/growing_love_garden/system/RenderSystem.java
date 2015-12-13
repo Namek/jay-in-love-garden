@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.NumberUtils;
 
 public class RenderSystem extends EntitySystem {
 	M<Collider> mCollider;
@@ -42,6 +43,7 @@ public class RenderSystem extends EntitySystem {
 	
 	private Color skyColor = new Color(0x7F99FFFF);
 	private Color grassColor = new Color(0x55CC45FF);
+	private Color nearGrassColor = new Color(0x05CC45FF);
 	
 
 	public RenderSystem() {
@@ -69,15 +71,19 @@ public class RenderSystem extends EntitySystem {
 		shapes.begin(ShapeType.Filled);
 		shapes.setColor(skyColor);
 		float bottom = C.World.TopHorizonGraphicBottom;
-		shapes.rect(0, bottom, sw, sh - bottom);
+		shapes.rect(0, bottom, sw, sh - bottom + C.World.ShakeHeightMax);
 		
 		shapes.setColor(grassColor);
-		shapes.rect(0, 0, sw, bottom);
+		shapes.rect(0, 0 - C.World.ShakeHeightMax, sw, bottom + C.World.ShakeHeightMax);
+		shapes.setColor(nearGrassColor);
+		shapes.rect(0, 0, sw, C.World.LowerHorizonGraphicBottom + C.World.ShakeHeightMax);
 		
 		shapes.end();
 
 		batch.begin();
+		batch.setColor(Color.WHITE);
 		batch.draw(horizon, 0, C.World.TopHorizonGraphicBottom);
+		batch.setColor(NumberUtils.intToFloatColor(0xffffff0e));
 		batch.draw(horizon, 0, C.World.LowerHorizonGraphicBottom, w/2, 0, w, h, -1, 1, 0);
 		
 		// then render all the other things
