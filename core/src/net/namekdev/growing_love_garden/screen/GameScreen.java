@@ -4,8 +4,12 @@ import net.mostlyoriginal.api.event.common.EventSystem;
 import net.mostlyoriginal.api.event.common.Subscribe;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
 import net.namekdev.growing_love_garden.MyGardenLoveGame;
+import net.namekdev.growing_love_garden.component.GameState;
+import net.namekdev.growing_love_garden.enums.C;
 import net.namekdev.growing_love_garden.event.LostGameEvent;
 import net.namekdev.growing_love_garden.event.WonLevelEvent;
+import net.namekdev.growing_love_garden.story.TalkSequence;
+import net.namekdev.growing_love_garden.story.Talks;
 import net.namekdev.growing_love_garden.system.AspectHelpers;
 import net.namekdev.growing_love_garden.system.CameraSystem;
 import net.namekdev.growing_love_garden.system.CollisionDebugSystem;
@@ -98,6 +102,35 @@ public class GameScreen extends BaseScreen<GameScreen> {
 	
 	@Subscribe
 	private void onWonGame(WonLevelEvent evt) {
-		game.pushScreen(new NextLevelScreen(evt.state).init(game));
+		final GameState state = evt.state;
+		int nextLevelIndex = state.levelIndex+1;
+
+		// Last level
+		if (nextLevelIndex == C.Levels.Goal.length) {
+			// TODO
+		}
+
+		// Not last level
+		else if (nextLevelIndex < C.Levels.Goal.length) {
+			int bonus = state.collectedLove - state.loveGoal;
+			int nextGoal = C.Levels.Goal[nextLevelIndex];
+
+			TalkSequence talk = Talks.nextLevelTalk.deepClone()
+				.param("bonus", bonus)
+				.param("goal", nextGoal);
+
+			game.pushScreen(new TalkScreen(talk, setNextLevel).init(game));
+		}
+
+		// No more levels - You won whole game
+		else {
+			// TODO you have won whole game
+		}
 	}
+	
+	private Runnable setNextLevel = new Runnable() {
+		public void run() {
+			world.getSystem(GameStateSystem.class).setNextLevel();
+		}
+	};
 }

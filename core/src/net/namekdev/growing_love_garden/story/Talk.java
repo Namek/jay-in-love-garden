@@ -29,4 +29,11 @@ public class Talk {
 		this.waitForClick = false;
 		return this;
 	}
+	
+	public Talk clone() {
+		Talk t = create(talker, leftSide, text);
+		t.delayAfter = delayAfter;
+		t.waitForClick = waitForClick;
+		return t;
+	}
 }

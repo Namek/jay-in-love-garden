@@ -25,7 +25,10 @@ public class TalkScreen extends BaseScreen<TalkScreen> {
 
 	GlyphLayout glyphs;
 
-	
+	public TalkScreen(TalkSequence talkSeq) {
+		this.talkSeq = talkSeq;
+	}
+
 	public TalkScreen(TalkSequence talkSeq, Runnable callbackExit) {
 		this.talkSeq = talkSeq;
 		this.callbackExit = callbackExit;
@@ -37,14 +40,18 @@ public class TalkScreen extends BaseScreen<TalkScreen> {
 
 		glyphs = new GlyphLayout();
 		setNextOrExit();
-		
+
 		return this;
 	}
 	
 	private void setNextOrExit() {
 		if (!talkSeq.hasNext()) {
 			popScreen();
-			callbackExit.run();
+
+			if (callbackExit != null) {
+				callbackExit.run();
+			}
+
 			return;
 		}
 		

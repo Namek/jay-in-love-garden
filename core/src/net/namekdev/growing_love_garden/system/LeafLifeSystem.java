@@ -110,6 +110,17 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 		return leafs;
 	}
 	
+	public void resetAllLeafs() {
+		IntBag leafs = aspects.getAllLeafs();
+		
+		for (int i = 0, n = leafs.size(); i < n; ++i) {
+			int leafId = leafs.get(i);
+			LoveLeaf leaf = mLeaf.get(leafId);
+		
+			leaf.reset();
+		}
+	}
+	
 	private boolean canDetachLeaf(LoveLeaf leaf) {
 		return leaf.stadium.isMin(LeafLifeStadium.Bigger);
 	}

@@ -17,7 +17,7 @@ public class CollisionDebugSystem extends EntitySystem {
 
 	CollisionSystem collisions;
 
-	public boolean enabled = true; 
+	public boolean enabled = false; 
 
 
 	public CollisionDebugSystem() {

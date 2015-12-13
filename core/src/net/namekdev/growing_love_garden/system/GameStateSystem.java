@@ -65,6 +65,15 @@ public class GameStateSystem extends BaseSystem {
 	public int valueLeaf(int leafId) {
 		return valueLeaf(mLeaf.get(leafId));
 	}
+	
+	public void setNextLevel() {
+		int level = ++gameState.levelIndex;
+		gameState.collectedLove = 0;
+		gameState.loveGoal = C.Levels.Goal[level];
+		gameState.yearProgress = 0;
+		
+		
+	}
 
 	@Subscribe
 	private void onLeafVacuumed(LeafVacuumedEvent evt) {
