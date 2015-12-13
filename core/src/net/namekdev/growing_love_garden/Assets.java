@@ -12,6 +12,7 @@ public class Assets {
 	public AssetManager assets;
 	public TextureAtlas textures;
 
+	public TextureRegion instruction;
 	public TextureRegion jayTex, bucketTex;
 	public TextureRegion manager;
 	public TextureRegion chatTop, chatMiddle, chatBottom;
@@ -25,6 +26,7 @@ public class Assets {
 		assets.finishLoading();
 
 		textures = assets.get(TEXTURES_ATLAS);
+		instruction = textures.findRegion("instruction");
 		jayTex = textures.findRegion("jay");
 		bucketTex = textures.findRegion("bucket");
 		manager = textures.findRegion("manager");

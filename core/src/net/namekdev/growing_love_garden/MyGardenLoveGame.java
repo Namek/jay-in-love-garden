@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import net.namekdev.growing_love_garden.screen.BaseScreen;
 import net.namekdev.growing_love_garden.screen.GameScreen;
+import net.namekdev.growing_love_garden.screen.InstructionScreen;
 import net.namekdev.growing_love_garden.screen.TalkScreen;
 import net.namekdev.growing_love_garden.story.Talks;
 import net.namekdev.growing_love_garden.system.*;
@@ -30,7 +31,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 		gameScreen.render(0f);
 		pushScreen(new TalkScreen(Talks.tutorialTalk, new Runnable() {
 			public void run() {
-				
+				pushScreen(new InstructionScreen().init(MyGardenLoveGame.this));
 			}
 		}).init(this));
 	}

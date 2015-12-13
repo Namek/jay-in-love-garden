@@ -65,11 +65,7 @@ public class TalkScreen extends BaseScreen<TalkScreen> {
 		float scaleX;
 
 		// darken background
-		Gdx.gl.glEnable(GL20.GL_BLEND);
-		shapes.begin(ShapeType.Filled);
-		shapes.setColor(0, 0, 0, 0.8f);
-		shapes.rect(0, 0, sw, sh);
-		shapes.end();
+		darkenBackground();
 
 
 		batch.begin();
