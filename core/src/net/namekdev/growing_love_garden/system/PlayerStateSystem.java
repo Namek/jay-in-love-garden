@@ -2,7 +2,6 @@ package net.namekdev.growing_love_garden.system;
 
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.namekdev.growing_love_garden.component.Pos;
-import net.namekdev.growing_love_garden.component.Stomp;
 import net.namekdev.growing_love_garden.enums.C;
 import net.namekdev.growing_love_garden.enums.Tags;
 import net.namekdev.growing_love_garden.component.*;
@@ -22,11 +21,11 @@ import com.badlogic.gdx.Input;
 
 public class PlayerStateSystem extends BaseSystem {
 	M<Pos> mPos;
-	M<Stomp> mStomp;
 	
 	AspectHelpers aspects;
 	CollisionSystem collisions;
 	TagManager tags;
+	PlayerStompSystem stompSystem;
 	
 	Input input;
 
@@ -58,7 +57,7 @@ public class PlayerStateSystem extends BaseSystem {
 		}
 		
 		if (input.isKeyJustPressed(Keys.SPACE)) {
-			mStomp.create(e);
+			stompSystem.tryStomp();
 		}
 	}
 

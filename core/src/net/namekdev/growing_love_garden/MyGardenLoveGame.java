@@ -2,21 +2,6 @@ package net.namekdev.growing_love_garden;
 
 import net.mostlyoriginal.api.event.common.EventSystem;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
-import net.namekdev.growing_love_garden.system.AspectHelpers;
-import net.namekdev.growing_love_garden.system.CameraSystem;
-import net.namekdev.growing_love_garden.system.CollisionDebugSystem;
-import net.namekdev.growing_love_garden.system.CollisionSystem;
-import net.namekdev.growing_love_garden.system.DepthSystem;
-import net.namekdev.growing_love_garden.system.EntityFactory;
-import net.namekdev.growing_love_garden.system.GameStateSystem;
-import net.namekdev.growing_love_garden.system.GameStatsRenderSystem;
-import net.namekdev.growing_love_garden.system.LeafLifeSystem;
-import net.namekdev.growing_love_garden.system.LeafRenderSystem;
-import net.namekdev.growing_love_garden.system.LeafVacuumSystem;
-import net.namekdev.growing_love_garden.system.PlayerStateSystem;
-import net.namekdev.growing_love_garden.system.PlayerStompSystem;
-import net.namekdev.growing_love_garden.system.RenderSystem;
-import net.namekdev.growing_love_garden.system.WorldInitSystem;
 import net.namekdev.growing_love_garden.system.*;
 
 import com.artemis.World;
@@ -53,6 +38,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 			.with(new RenderSystem())
 			.with(new GameStatsRenderSystem())
 			.with(new CollisionDebugSystem())
+			.with(new SchedulerSystem())
 			.with(new EventSystem())
 			.build();
 		

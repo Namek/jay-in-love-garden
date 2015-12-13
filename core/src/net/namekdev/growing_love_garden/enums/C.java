@@ -9,6 +9,7 @@ public interface C {
 	public interface Player {
 		public static final float NormalMoveSpeed = 8f;
 		public static final float StompDuration = 0.1f;
+		public static final float StompCooldown = 0.7f;
 		
 		public static final float ColliderBottomWidth = 80;
 		public static final float ColliderBottomHeight = 50;

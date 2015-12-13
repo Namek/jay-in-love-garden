@@ -1,10 +1,11 @@
 package net.namekdev.growing_love_garden.system;
 
+import static net.mostlyoriginal.api.operation.OperationFactory.*;
+import static net.namekdev.growing_love_garden.utils.operation.OperationFactory2.*;
+import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.event.common.Subscribe;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
-import net.namekdev.growing_love_garden.component.Jay;
 import net.namekdev.growing_love_garden.component.LoveLeaf;
-import net.namekdev.growing_love_garden.component.Stomp;
 import net.namekdev.growing_love_garden.enums.C;
 import net.namekdev.growing_love_garden.enums.LeafLifeStadium;
 import net.namekdev.growing_love_garden.enums.LeafPositionState;
@@ -12,44 +13,53 @@ import net.namekdev.growing_love_garden.event.LeafVacuumedEvent;
 import net.namekdev.growing_love_garden.utils.Utils;
 import net.namekdev.growing_love_garden.utils.Utils.IntBagPredicate;
 
-import com.artemis.Aspect;
-import com.artemis.Entity;
-import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.BaseSystem;
 import com.artemis.utils.IntBag;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
 
-public class PlayerStompSystem extends EntityProcessingSystem {
+public class PlayerStompSystem extends BaseSystem {
 	M<LoveLeaf> mLeaf;
-	M<Stomp> mStomp;
+	M<Schedule> mSchedule;
 	
 	CameraSystem cameraSystem;
 	GameStateSystem gameState;
 	LeafLifeSystem leafLifeSystem;
 	LeafVacuumSystem leafVacuum;
 	PlayerStateSystem playerState;
+	SchedulerSystem scheduler;
+	
+	float stompProgress = 0;
+	boolean stompBlocked = false;
+	int treeId;
 
-
-	public PlayerStompSystem() {
-		super(Aspect.all(Stomp.class));
-	}
 
 	@Override
-	protected void process(Entity e) {
-		Stomp stomp = mStomp.get(e);
-		stomp.progress += world.getDelta() / C.Player.StompDuration;
+	protected void processSystem() {
+		if (stompProgress >= 1f) {
+			return;
+		}
+			
+		stompProgress += world.getDelta() / C.Player.StompDuration;
+	}
+
+	public void tryStomp() {
+		if (stompBlocked) {
+			return;
+		}
 		
-		if (stomp.progress >= 1f) {
-			mStomp.remove(e);
+		final int treeId = playerState.findCloseTree();
+		
+		if (treeId < 0) {
 			return;
 		}
 
-		final int treeId = playerState.findCloseTree();
-		
-		if (treeId >= 0) {
-			cameraSystem.shake(C.Player.StompDuration);
-			Timer.schedule(new Task() {
-				@Override
+		stompBlocked = true;
+		stompProgress = 0;
+		cameraSystem.shake(C.Player.StompDuration);
+
+		this.treeId = treeId;
+
+		scheduler.schedule(
+			delayedOperation(C.World.TimeToDetachLeafs, new Runnable() {
 				public void run() {
 					IntBag leafs = leafLifeSystem.detachLeafs(treeId);
 					IntBag valuableLeafs = Utils.filterBag(leafs, new IntBagPredicate() {
@@ -59,8 +69,17 @@ public class PlayerStompSystem extends EntityProcessingSystem {
 					});
 					collectLeafs(valuableLeafs);
 				}
-			}, C.World.TimeToDetachLeafs);
-		}
+			})
+		);
+		
+		// Block stomp for some time
+		scheduler.schedule(
+			delayedOperation(C.Player.StompCooldown, new Runnable() {
+				public void run() {
+					stompBlocked = false;
+				}
+			})
+		);
 	}
 	
 	private void collectLeafs(IntBag leafs) {
