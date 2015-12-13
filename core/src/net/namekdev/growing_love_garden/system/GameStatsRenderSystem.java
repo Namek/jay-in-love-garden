@@ -38,7 +38,15 @@ public class GameStatsRenderSystem extends EntityProcessingSystem {
 
 		final SpriteBatch batch = renderer.batch;
 		batch.begin();
-		String str = state.collectedLove + " / " + state.loveGoal;
+		String str = null;
+		
+		if (state.collectedLove <= state.loveGoal) { 
+			str = state.collectedLove + " / " + state.loveGoal;
+		}
+		else {
+			str = state.loveGoal + " + " + (state.collectedLove - state.loveGoal);
+		}
+		
 		scoreFont.setColor(Color.WHITE);
 		scoreFont.draw(batch, str, statusPos.x, statusPos.y);
 		batch.end();
