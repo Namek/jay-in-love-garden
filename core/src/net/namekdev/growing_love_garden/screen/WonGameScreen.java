@@ -1,14 +1,20 @@
 package net.namekdev.growing_love_garden.screen;
 
 import net.namekdev.growing_love_garden.MyGardenLoveGame;
+import net.namekdev.growing_love_garden.component.Renderable;
 import net.namekdev.growing_love_garden.enums.C;
+import net.namekdev.growing_love_garden.system.AspectHelpers;
 import net.namekdev.growing_love_garden.utils.ActionTimer;
 import net.namekdev.growing_love_garden.utils.ActionTimer.TimerState;
 
+import com.artemis.Entity;
+import com.artemis.World;
+import com.artemis.utils.IntBag;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class WonGameScreen extends BaseScreen<WonGameScreen> {
@@ -43,8 +49,12 @@ public class WonGameScreen extends BaseScreen<WonGameScreen> {
 		
 		if (waitTimer.update(delta) != TimerState.Active) {
 			if (wasQueuedToNextScreen) {
+				newGamePlus();
 				popScreen();
-				callbackExit.run();
+				
+				if (callbackExit != null) {
+					callbackExit.run();
+				}
 			}
 		}
 		
@@ -54,4 +64,16 @@ public class WonGameScreen extends BaseScreen<WonGameScreen> {
 		}
 	}
 
+	private void newGamePlus() {
+		World world = game.getGameScreen().world;
+		IntBag leafs = world.getSystem(AspectHelpers.class).getAllLeafs();
+		TextureRegion heart = assets.textures.findRegion("heart");
+		
+		for (int i = 0, n = leafs.size(); i < n; ++i) {
+			Entity e = world.getEntity(leafs.get(i));
+			Renderable renderable = e.getComponent(Renderable.class);
+
+			renderable.sprite = heart;
+		}
+	}
 }

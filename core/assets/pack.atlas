@@ -32,6 +32,13 @@ chat_top
   orig: 400, 7
   offset: 0, 0
   index: -1
+heart
+  rotate: false
+  xy: 1089, 244
+  size: 10, 15
+  orig: 10, 15
+  offset: 0, 0
+  index: -1
 horizon
   rotate: false
   xy: 2, 769
@@ -55,7 +62,7 @@ jay
   index: -1
 leaf
   rotate: false
-  xy: 1089, 244
+  xy: 1210, 400
   size: 10, 15
   orig: 10, 15
   offset: 0, 0
