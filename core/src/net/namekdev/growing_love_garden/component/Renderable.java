@@ -26,5 +26,4 @@ public class Renderable extends PooledComponent {
 		this.sprite = texture;
 		type = Type.Sprite;
 	}
-
 }

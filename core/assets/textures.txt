@@ -1,75 +1,82 @@
 textures.png
-size: 1746, 754
+size: 1450, 979
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-chat_top
-  rotate: false
-  xy: 0, 0
-  size: 663, 7
-  orig: 663, 7
-  offset: 0, 0
-  index: -1
-leaf
-  rotate: false
-  xy: 663, 0
-  size: 10, 15
-  orig: 10, 15
-  offset: 0, 0
-  index: -1
 bucket
   rotate: false
-  xy: 673, 0
+  xy: 0, 0
   size: 30, 40
   orig: 30, 40
   offset: 0, 0
   index: -1
-smile
-  rotate: false
-  xy: 703, 0
-  size: 119, 58
-  orig: 119, 58
-  offset: 0, 0
-  index: -1
 chat_bottom
   rotate: false
-  xy: 822, 0
+  xy: 30, 0
   size: 663, 64
   orig: 663, 64
   offset: 0, 0
   index: -1
-manager
-  rotate: false
-  xy: 1485, 0
-  size: 119, 154
-  orig: 119, 154
-  offset: 0, 0
-  index: -1
-jay
-  rotate: false
-  xy: 1604, 0
-  size: 119, 154
-  orig: 119, 154
-  offset: 0, 0
-  index: -1
 chat_middle
   rotate: false
-  xy: 0, 154
+  xy: 693, 0
   size: 663, 154
   orig: 663, 154
   offset: 0, 0
   index: -1
-tree
+chat_top
   rotate: false
-  xy: 663, 154
-  size: 283, 271
-  orig: 283, 271
+  xy: 0, 154
+  size: 663, 7
+  orig: 663, 7
+  offset: 0, 0
+  index: -1
+horizon
+  rotate: false
+  xy: 0, 161
+  size: 1280, 218
+  orig: 1280, 218
   offset: 0, 0
   index: -1
 instruction
   rotate: false
-  xy: 946, 154
+  xy: 0, 379
   size: 800, 600
   orig: 800, 600
+  offset: 0, 0
+  index: -1
+jay
+  rotate: false
+  xy: 800, 379
+  size: 119, 154
+  orig: 119, 154
+  offset: 0, 0
+  index: -1
+leaf
+  rotate: false
+  xy: 919, 379
+  size: 10, 15
+  orig: 10, 15
+  offset: 0, 0
+  index: -1
+manager
+  rotate: false
+  xy: 929, 379
+  size: 119, 154
+  orig: 119, 154
+  offset: 0, 0
+  index: -1
+smile
+  rotate: false
+  xy: 1048, 379
+  size: 119, 58
+  orig: 119, 58
+  offset: 0, 0
+  index: -1
+tree
+  rotate: false
+  xy: 1167, 379
+  size: 283, 271
+  orig: 283, 271
   offset: 0, 0
   index: -1

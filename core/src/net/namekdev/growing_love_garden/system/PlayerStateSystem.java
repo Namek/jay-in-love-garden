@@ -50,6 +50,10 @@ public class PlayerStateSystem extends BaseSystem {
 		pos.x += C.Player.NormalMoveSpeed * horzDir;
 		pos.y += C.Player.NormalMoveSpeed * vertDir;
 		
+		if (pos.y > C.World.TopHorizonCollisionBottom) {
+			pos.y = C.World.TopHorizonCollisionBottom;
+		}
+		
 		// TODO flip vertically if horzDir == 1
 		
 		if (isMoving) {

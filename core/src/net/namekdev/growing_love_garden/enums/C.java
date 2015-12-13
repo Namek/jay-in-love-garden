@@ -53,6 +53,10 @@ public interface C {
 	}
 	
 	public interface World {
+		public static final float TopHorizonGraphicBottom = 385;
+		public static final float TopHorizonCollisionBottom = TopHorizonGraphicBottom + 100;
+		public static final float LowerHorizonGraphicBottom = 150;
+
 		public static final float ShakeWidthMin = 4;
 		public static final float ShakeWidthMax = 10;
 		public static final float ShakeHeightMin = 1;
