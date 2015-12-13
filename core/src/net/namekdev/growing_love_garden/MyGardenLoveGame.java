@@ -1,59 +1,59 @@
 package net.namekdev.growing_love_garden;
 
-import net.mostlyoriginal.api.event.common.EventSystem;
-import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
+import java.util.Stack;
+
+import net.namekdev.growing_love_garden.screen.BaseScreen;
+import net.namekdev.growing_love_garden.screen.GameScreen;
+import net.namekdev.growing_love_garden.screen.TutorialScreen;
 import net.namekdev.growing_love_garden.system.*;
 
-import com.artemis.World;
-import com.artemis.WorldConfiguration;
-import com.artemis.WorldConfigurationBuilder;
-import com.artemis.managers.TagManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 
 public class MyGardenLoveGame extends ApplicationAdapter {
-	World world;
+	private Stack<BaseScreen> screenStack = new Stack<BaseScreen>();
+	private GameScreen gameScreen;
+
 	
 	@Override
 	public void create() {
-		WorldConfiguration cfg = new WorldConfigurationBuilder()
-			.with(new ExtendedComponentMapperPlugin())
-			.with(new AspectHelpers())
-			.with(new EntityFactory())
-			.with(new WorldInitSystem())
-			.with(new TagManager())
-	
-			// loop systems
-			.with(new GameStateSystem())
-			.with(new PlayerStateSystem())
-			.with(new PlayerStompSystem())
-			.with(new CollisionSystem())
-			.with(new LeafLifeSystem())
-			.with(new LeafRenderSystem())
-			.with(new CameraSystem())
-			.with(new LeafVacuumSystem())
-			.with(new DepthSystem())
-			.with(new RenderSystem())
-			.with(new GameStatsRenderSystem())
-			.with(new CollisionDebugSystem())
-			.with(new SchedulerSystem())
-			.with(new EventSystem())
-			.build();
-		
-		world = new World(cfg);
+		gameScreen = new GameScreen(this);
+
+		pushScreen(gameScreen);
+//		pushScreen(new TutorialScreen(this));
 	}
 
 	@Override
 	public void render() {
-		world.setDelta(Math.min(1/15f, Gdx.graphics.getDeltaTime()));
-		world.process();
-		
 		if (Gdx.app.getType() == ApplicationType.Desktop) {
 			if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 				Gdx.app.exit();
 			}
 		}
+		
+		gameScreen.isPaused = screenStack.size() > 1;
+
+		float dt = Math.min(1/15f, Gdx.graphics.getDeltaTime());
+		for (int i = 0, n = screenStack.size(); i < n; ++i) {
+			screenStack.get(i).render(dt);
+		}
+	}
+
+	public void popScreen(BaseScreen screen) {
+		if (screenStack.peek() != screen) {
+			throw new RuntimeException("Popping another screen.");
+		}
+		
+		screenStack.pop();
+	}
+	
+	public void pushScreen(BaseScreen screen) {
+		screenStack.push(screen);
+	}
+
+	public GameScreen getGameScreen() {
+		return gameScreen;
 	}
 }
