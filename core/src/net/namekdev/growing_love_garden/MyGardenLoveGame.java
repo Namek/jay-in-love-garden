@@ -29,7 +29,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 		pushScreen(gameScreen);
 
 		gameScreen.render(0f);
-		pushScreen(new TalkScreen(Talks.introTalk, new Runnable() {
+		pushScreen(new TalkScreen(Talks.intro, new Runnable() {
 			public void run() {
 				pushScreen(new InstructionScreen().init(MyGardenLoveGame.this));
 			}

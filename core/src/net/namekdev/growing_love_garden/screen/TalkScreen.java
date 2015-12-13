@@ -1,6 +1,7 @@
 package net.namekdev.growing_love_garden.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -85,6 +86,11 @@ public class TalkScreen extends BaseScreen<TalkScreen> {
 		scaleX = (talk.leftSide ? -1 : 1) * scale;
 		x = talk.leftSide ? chatLeft - partWidth*scale + 70 : chatRight + 30;
 		batch.draw(talker, x, sh - top - partHeight*scale, partWidth/2, 0, partWidth, partHeight, scaleX, scale, 0);
+		
+		if (talk.smile) {
+			partHeight = assets.smile.getRegionHeight();
+			batch.draw(assets.smile, x, sh - top - partHeight*scale, partWidth/2, 0, partWidth, partHeight, scaleX, scale, 0);
+		}
 
 		// top part
 		x = chatLeft;
@@ -111,7 +117,7 @@ public class TalkScreen extends BaseScreen<TalkScreen> {
 		batch.end();
 
 
-		if (Gdx.input.justTouched()) {
+		if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Keys.SPACE)) {
 			setNextOrExit();
 		}
 	}

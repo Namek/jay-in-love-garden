@@ -68,11 +68,10 @@ public class GameStateSystem extends BaseSystem {
 	
 	public void setNextLevel() {
 		int level = ++gameState.levelIndex;
+		gameState.totalCollectedLove += gameState.getBonus();
 		gameState.collectedLove = 0;
 		gameState.loveGoal = C.Levels.Goal[level];
 		gameState.yearProgress = 0;
-		
-		
 	}
 
 	@Subscribe

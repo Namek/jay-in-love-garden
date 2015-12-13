@@ -6,6 +6,7 @@ public class Talk {
 	public String text;
 	public float delayAfter = 0;
 	public boolean waitForClick = true;
+	public boolean smile = false;
 	
 	public static Talk create(int talker, boolean leftSide, String text) {
 		Talk t = new Talk();
@@ -30,10 +31,16 @@ public class Talk {
 		return this;
 	}
 	
+	public Talk smile() {
+		this.smile = true;
+		return this;
+	}
+	
 	public Talk clone() {
 		Talk t = create(talker, leftSide, text);
 		t.delayAfter = delayAfter;
 		t.waitForClick = waitForClick;
+		t.smile = smile;
 		return t;
 	}
 }

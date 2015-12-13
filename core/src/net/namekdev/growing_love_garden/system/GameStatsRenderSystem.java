@@ -41,10 +41,10 @@ public class GameStatsRenderSystem extends EntityProcessingSystem {
 		String str = null;
 		
 		if (state.collectedLove <= state.loveGoal) { 
-			str = state.collectedLove + " / " + state.loveGoal;
+			str = "$" + state.collectedLove + " / $" + state.loveGoal;
 		}
 		else {
-			str = state.loveGoal + " + " + (state.collectedLove - state.loveGoal);
+			str = "$" + state.loveGoal + " + $" + (state.collectedLove - state.loveGoal);
 		}
 		
 		scoreFont.setColor(Color.WHITE);

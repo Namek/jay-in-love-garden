@@ -105,17 +105,13 @@ public class GameScreen extends BaseScreen<GameScreen> {
 		final GameState state = evt.state;
 		int nextLevelIndex = state.levelIndex+1;
 
-		// Last level
-		if (nextLevelIndex == C.Levels.Goal.length) {
-			// TODO
-		}
-
-		// Not last level
-		else if (nextLevelIndex < C.Levels.Goal.length) {
-			int bonus = state.collectedLove - state.loveGoal;
+		// Is there next level?
+		if (nextLevelIndex < C.Levels.Goal.length) {
+			int bonus = state.getBonus();
 			int nextGoal = C.Levels.Goal[nextLevelIndex];
+			boolean isLastLevel = nextLevelIndex == C.Levels.Goal.length-1;
 
-			TalkSequence talk = Talks.nextLevelTalk.deepClone()
+			TalkSequence talk = (!isLastLevel ? Talks.nextLevel : Talks.finalMission).deepClone()
 				.param("bonus", bonus)
 				.param("goal", nextGoal);
 
@@ -124,7 +120,7 @@ public class GameScreen extends BaseScreen<GameScreen> {
 
 		// No more levels - You won whole game
 		else {
-			// TODO you have won whole game
+			game.pushScreen(new WonGameScreen().init(game));
 		}
 	}
 	

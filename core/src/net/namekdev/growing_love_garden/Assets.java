@@ -14,7 +14,7 @@ public class Assets {
 
 	public TextureRegion instruction;
 	public TextureRegion jayTex, bucketTex;
-	public TextureRegion manager;
+	public TextureRegion manager, smile;
 	public TextureRegion chatTop, chatMiddle, chatBottom;
 
 
@@ -30,6 +30,7 @@ public class Assets {
 		jayTex = textures.findRegion("jay");
 		bucketTex = textures.findRegion("bucket");
 		manager = textures.findRegion("manager");
+		smile = textures.findRegion("smile");
 		chatTop = textures.findRegion("chat_top");
 		chatMiddle = textures.findRegion("chat_middle");
 		chatBottom = textures.findRegion("chat_bottom");
