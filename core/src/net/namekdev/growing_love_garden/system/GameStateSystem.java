@@ -79,6 +79,8 @@ public class GameStateSystem extends BaseSystem {
 
 	public void setFirstLevel() {
 		gameState.reset();
+		gameState.loveGoal = C.Levels.Goal[gameState.levelIndex];
+
 		leafLifeSystem.resetAllLeafs();
 	}
 
