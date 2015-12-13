@@ -25,6 +25,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.NumberUtils;
 
 /**
@@ -51,10 +52,12 @@ public class RenderSystem extends BaseSystem {
 	ShapeRenderer shapes;
 	
 	final Rectangle tmpRect = new Rectangle();
+	private final Vector2 screenPos = new Vector2();
 	
 	private Color skyColor = new Color(0x7F99FFFF);
 	private Color grassColor = new Color(0x55CC45FF);
 	private Color nearGrassColor = new Color(0x05CC45FF);
+	
 
 
 	@Override
@@ -76,14 +79,19 @@ public class RenderSystem extends BaseSystem {
 		final TextureRegion horizon = entityFactory.assets.horizon;
 		float w = horizon.getRegionWidth(), h = horizon.getRegionHeight();
 		shapes.begin(ShapeType.Filled);
+
 		shapes.setColor(skyColor);
 		float bottom = C.World.TopHorizonGraphicBottom;
-		shapes.rect(0, bottom, sw, sh - bottom + C.World.ShakeHeightMax);
+		cameraSystem.worldToScreen(screenPos.set(0, bottom));
+		shapes.rect(0, screenPos.y, sw, sh);
 		
 		shapes.setColor(grassColor);
-		shapes.rect(0, 0 - C.World.ShakeHeightMax, sw, bottom + C.World.ShakeHeightMax);
+		cameraSystem.worldToScreen(screenPos.set(0, -C.World.ShakeHeightMax));
+		shapes.rect(0, screenPos.y, sw, bottom + C.World.ShakeHeightMax);
+		
 		shapes.setColor(nearGrassColor);
-		shapes.rect(0, 0, sw, C.World.LowerHorizonGraphicBottom + C.World.ShakeHeightMax);
+		cameraSystem.worldToScreen(screenPos.set(0, C.World.LowerHorizonGraphicBottom));
+		shapes.rect(0, 0, sw, screenPos.y);
 		
 		shapes.end();
 

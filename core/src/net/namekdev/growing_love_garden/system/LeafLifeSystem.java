@@ -119,8 +119,11 @@ public class LeafLifeSystem extends EntityProcessingSystem {
 		for (int i = 0, n = leafs.size(); i < n; ++i) {
 			int leafId = leafs.get(i);
 			LoveLeaf leaf = mLeaf.get(leafId);
+			Pos pos = mPos.get(leafId);
+			OrigPos origPos = mOrigPos.get(leafId);
 		
 			leaf.reset();
+			pos.xy(origPos.x, origPos.y);
 		}
 	}
 	

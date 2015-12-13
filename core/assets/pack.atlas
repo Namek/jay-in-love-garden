@@ -6,77 +6,77 @@ filter: Nearest,Nearest
 repeat: none
 bucket
   rotate: false
-  xy: 1949, 908
+  xy: 2, 2
   size: 30, 40
   orig: 30, 40
   offset: 0, 0
   index: -1
 chat_bottom
   rotate: false
-  xy: 2, 62
-  size: 663, 64
-  orig: 663, 64
+  xy: 1284, 809
+  size: 400, 64
+  orig: 400, 64
   offset: 0, 0
   index: -1
 chat_middle
   rotate: false
-  xy: 1284, 794
-  size: 663, 154
-  orig: 663, 154
+  xy: 1284, 803
+  size: 400, 4
+  orig: 400, 4
   offset: 0, 0
   index: -1
 chat_top
   rotate: false
-  xy: 1284, 785
-  size: 663, 7
-  orig: 663, 7
+  xy: 2, 44
+  size: 400, 7
+  orig: 400, 7
   offset: 0, 0
   index: -1
 horizon
   rotate: false
-  xy: 2, 730
+  xy: 2, 655
   size: 1280, 218
   orig: 1280, 218
   offset: 0, 0
   index: -1
 instruction
   rotate: false
-  xy: 2, 128
+  xy: 2, 53
   size: 800, 600
   orig: 800, 600
   offset: 0, 0
   index: -1
 jay
   rotate: false
-  xy: 804, 301
+  xy: 804, 226
   size: 119, 154
   orig: 119, 154
   offset: 0, 0
   index: -1
 leaf
   rotate: false
-  xy: 667, 111
+  xy: 1284, 786
   size: 10, 15
   orig: 10, 15
   offset: 0, 0
   index: -1
 manager
   rotate: false
-  xy: 1089, 574
+  xy: 1089, 499
   size: 119, 154
   orig: 119, 154
   offset: 0, 0
   index: -1
 smile
   rotate: false
-  xy: 2, 2
+  xy: 1686, 815
   size: 119, 58
   orig: 119, 58
   offset: 0, 0
   index: -1
 tree
   rotate: false
-  xy: 804, 457
+  xy: 804, 382
   size: 283, 271
   orig: 283, 271
   offset: 0, 0

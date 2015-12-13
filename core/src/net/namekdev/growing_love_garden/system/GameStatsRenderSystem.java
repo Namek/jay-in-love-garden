@@ -6,6 +6,7 @@ import net.namekdev.growing_love_garden.component.GameState;
 import com.artemis.Aspect;
 import com.artemis.Entity;
 import com.artemis.systems.EntityProcessingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,12 +17,15 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GameStatsRenderSystem extends EntityProcessingSystem {
 	M<GameState> mGameState;
+
+	CameraSystem cameraSystem;
 	RenderSystem renderer;
 
 	BitmapFont scoreFont;
 	public final Vector2 yearBarPos = new Vector2(20, 50);
 	public final Vector2 loveBarPos = new Vector2(20, 25);
 	public final Vector2 statusTextPos = new Vector2(20, 20);
+	private final Vector2 screenPos = new Vector2(); 
 	private final Color nearGrassColor = new Color(0x05CC45FF);//taken from RenderSystem
 
 	
@@ -37,6 +41,7 @@ public class GameStatsRenderSystem extends EntityProcessingSystem {
 	@Override
 	protected void process(Entity e) {
 		GameState state = mGameState.get(e);
+		final float sh = Gdx.graphics.getHeight();
 
 		final SpriteBatch batch = renderer.batch;
 		batch.begin();
@@ -50,7 +55,8 @@ public class GameStatsRenderSystem extends EntityProcessingSystem {
 		}
 		
 		scoreFont.setColor(Color.WHITE);
-		scoreFont.draw(batch, str, statusTextPos.x, statusTextPos.y);
+		cameraSystem.screenToWorld(screenPos.set(statusTextPos.x, sh - statusTextPos.y));
+		scoreFont.draw(batch, str, screenPos.x, screenPos.y);
 		batch.end();
 		
 		final ShapeRenderer shapes = renderer.shapes;

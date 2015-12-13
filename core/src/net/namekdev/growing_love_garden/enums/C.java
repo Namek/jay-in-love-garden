@@ -17,6 +17,11 @@ public interface C {
 		public static final float ColliderBottomHeight = 50;
 	}
 	
+	public interface Camera {
+		public static final float MoveThresholdScreenVertSizePercent = 0.49f;
+		public static final float MoveThresholdScreenHorzSizePercent = 0.49f;
+	}
+	
 	public interface Bucket {
 		public static final float PosLeft = 25;
 		public static final float PosTop = 98;
@@ -55,6 +60,8 @@ public interface C {
 	}
 	
 	public interface World {
+		public static final float Width = 1280;
+		public static final float Height = 768;
 		public static final float TopHorizonGraphicBottom = 385;
 		public static final float TopHorizonCollisionBottom = TopHorizonGraphicBottom + 100;
 		public static final float LowerHorizonGraphicBottom = 150;

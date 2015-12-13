@@ -57,9 +57,19 @@ public class PlayerStateSystem extends BaseSystem {
 
 		pos.x += C.Player.NormalMoveSpeed * horzDir;
 		pos.y += C.Player.NormalMoveSpeed * vertDir;
-		
+
 		if (pos.y > C.World.TopHorizonCollisionBottom) {
 			pos.y = C.World.TopHorizonCollisionBottom;
+		}
+		else if (pos.y < 10) {
+			pos.y = 10;
+		}
+
+		if (pos.x > C.World.Width - 50) {
+			pos.x = C.World.Width - 50;
+		}
+		else if (pos.x < 50) {
+			pos.x = 50;
 		}
 
 		if (scale.x * horzDir > 0) {
