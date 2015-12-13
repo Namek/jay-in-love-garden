@@ -1,5 +1,6 @@
 package net.namekdev.growing_love_garden.system;
 
+import net.mostlyoriginal.api.event.common.EventSystem;
 import net.mostlyoriginal.api.event.common.Subscribe;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.namekdev.growing_love_garden.component.GameState;
@@ -7,6 +8,8 @@ import net.namekdev.growing_love_garden.component.LoveLeaf;
 import net.namekdev.growing_love_garden.enums.C;
 import net.namekdev.growing_love_garden.enums.LeafLifeStadium;
 import net.namekdev.growing_love_garden.event.LeafVacuumedEvent;
+import net.namekdev.growing_love_garden.event.LostGameEvent;
+import net.namekdev.growing_love_garden.event.WonLevelEvent;
 
 import com.artemis.BaseSystem;
 import com.artemis.EntityEdit;
@@ -16,6 +19,7 @@ public class GameStateSystem extends BaseSystem {
 	M<GameState> mGameState;
 	M<LoveLeaf> mLeaf;
 
+	EventSystem events;
 	TagManager tags;
 
 	public GameState gameState;
@@ -32,6 +36,19 @@ public class GameStateSystem extends BaseSystem {
 	protected void processSystem() {
 		float dt = world.getDelta();
 		gameState.yearProgress += dt * C.Levels.YearProgressingSpeed[gameState.levelIndex];
+
+		// Year has passed, notify
+		if (gameState.yearProgress >= 1f) {
+			gameState.yearProgress = 1f;
+
+			if (gameState.isThereEnoughLove()) {
+				events.dispatch(new WonLevelEvent(gameState));
+			}
+			else {
+				events.dispatch(new LostGameEvent(gameState));
+			}
+		}
+		
 	}
 
 	public int valueLeaf(LoveLeaf leaf) {

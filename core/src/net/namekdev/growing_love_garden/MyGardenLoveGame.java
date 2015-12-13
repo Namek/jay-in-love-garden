@@ -47,6 +47,7 @@ public class MyGardenLoveGame extends ApplicationAdapter {
 		}
 		
 		screenStack.pop();
+		screen.dispose();
 	}
 	
 	public void pushScreen(BaseScreen screen) {

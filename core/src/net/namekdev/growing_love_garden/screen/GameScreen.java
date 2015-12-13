@@ -1,8 +1,11 @@
 package net.namekdev.growing_love_garden.screen;
 
 import net.mostlyoriginal.api.event.common.EventSystem;
+import net.mostlyoriginal.api.event.common.Subscribe;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
 import net.namekdev.growing_love_garden.MyGardenLoveGame;
+import net.namekdev.growing_love_garden.event.LostGameEvent;
+import net.namekdev.growing_love_garden.event.WonLevelEvent;
 import net.namekdev.growing_love_garden.system.AspectHelpers;
 import net.namekdev.growing_love_garden.system.CameraSystem;
 import net.namekdev.growing_love_garden.system.CollisionDebugSystem;
@@ -74,11 +77,22 @@ public class GameScreen extends BaseScreen {
 		});
 	
 		world = new World(cfg);
+		world.getSystem(EventSystem.class).registerEvents(this);
 	}
 
 	@Override
 	public void render(float delta) {
 		world.setDelta(!isPaused ? delta : 0);
 		world.process();
+	}
+	
+	@Subscribe
+	private void onLostGame(LostGameEvent evt) {
+		game.pushScreen(new GameOverScreen(game, evt.state));
+	}
+	
+	@Subscribe
+	private void onWonGame(WonLevelEvent evt) {
+		game.pushScreen(new NextLevelScreen(game, evt.state));
 	}
 }

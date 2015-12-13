@@ -19,4 +19,8 @@ public class GameState extends PooledComponent {
 		levelIndex = 0;
 		yearProgress = 0;
 	}
+
+	public boolean isThereEnoughLove() {
+		return collectedLove >= loveGoal;
+	}
 }
