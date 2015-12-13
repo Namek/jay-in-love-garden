@@ -49,6 +49,7 @@ public class DepthSystem extends BaseSystem implements SubscriptionListener {
 	
 		if (dirtyOrder) {
 			Sort.instance().sort(sortedEntities, zOrderComparator);
+			dirtyOrder = false;
 		}
 	}
 
