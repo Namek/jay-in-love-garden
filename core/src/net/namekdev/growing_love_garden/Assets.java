@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
-	private static final String TEXTURES_ATLAS = "textures.txt";
+	private static final String TEXTURES_ATLAS = "pack.atlas";
 
 	public BitmapFont talkFont;
 	public AssetManager assets;
