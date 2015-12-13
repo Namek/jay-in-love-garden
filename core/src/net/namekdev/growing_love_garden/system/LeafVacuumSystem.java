@@ -95,7 +95,7 @@ public class LeafVacuumSystem extends EntityProcessingSystem {
 		LoveLeaf leaf = mLeaf.get(leafId);
 		leaf.state = LeafPositionState.FlyingToAccount;
 		Vacuumed vac = mVacuumed.create(leafId);
-		vac.targetX = gameStats.statusPos.x;
-		vac.targetY = gameStats.statusPos.y;
+		vac.targetX = gameStats.statusTextPos.x;
+		vac.targetY = gameStats.statusTextPos.y;
 	}
 }

@@ -19,8 +19,10 @@ public class GameStatsRenderSystem extends EntityProcessingSystem {
 	RenderSystem renderer;
 
 	BitmapFont scoreFont;
-	public final Vector2 statusPos = new Vector2(20, 20);
-	public final Vector2 yearPos = new Vector2(20, 40);
+	public final Vector2 yearBarPos = new Vector2(20, 50);
+	public final Vector2 loveBarPos = new Vector2(20, 25);
+	public final Vector2 statusTextPos = new Vector2(20, 20);
+	private final Color nearGrassColor = new Color(0x05CC45FF);//taken from RenderSystem
 
 	
 	public GameStatsRenderSystem() {
@@ -48,15 +50,23 @@ public class GameStatsRenderSystem extends EntityProcessingSystem {
 		}
 		
 		scoreFont.setColor(Color.WHITE);
-		scoreFont.draw(batch, str, statusPos.x, statusPos.y);
+		scoreFont.draw(batch, str, statusTextPos.x, statusTextPos.y);
 		batch.end();
 		
 		final ShapeRenderer shapes = renderer.shapes;
 		shapes.begin(ShapeType.Filled);
+
 		shapes.setColor(Color.WHITE);
-		shapes.rect(yearPos.x, yearPos.y, 100, 15);
+		shapes.rect(yearBarPos.x, yearBarPos.y, 100, 15);
 		shapes.setColor(Color.CORAL);
-		shapes.rect(yearPos.x + 2, yearPos.y + 2, MathUtils.clamp(state.yearProgress, 0, 1)*96, 11);
+		shapes.rect(yearBarPos.x + 2, yearBarPos.y + 2, MathUtils.clamp(state.yearProgress, 0, 1)*96, 11);
+
+		float loveProgress = state.collectedLove / (float)state.loveGoal;
+		shapes.setColor(Color.WHITE);
+		shapes.rect(loveBarPos.x, loveBarPos.y, 100, 15);
+		shapes.setColor(nearGrassColor);
+		shapes.rect(loveBarPos.x + 2, loveBarPos.y + 2, MathUtils.clamp(loveProgress, 0, 1)*96, 11);
+
 		shapes.end();
 	}
 }
