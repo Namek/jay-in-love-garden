@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 900;
 		config.height = 600;
+		config.title = "Jay in Love Garden";
 //		config.width = 1280;
 //		config.height = 768;
 		new LwjglApplication(new MyGardenLoveGame(), config);
