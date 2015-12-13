@@ -17,6 +17,7 @@ public class Assets {
 	public TextureRegion jayTex, bucketTex;
 	public TextureRegion manager, smile;
 	public TextureRegion chatTop, chatMiddle, chatBottom;
+	public TextureRegion thanks;
 
 
 	public void loadAll() {
@@ -36,5 +37,6 @@ public class Assets {
 		chatTop = textures.findRegion("chat_top");
 		chatMiddle = textures.findRegion("chat_middle");
 		chatBottom = textures.findRegion("chat_bottom");
+		thanks = textures.findRegion("thanks");
 	}
 }

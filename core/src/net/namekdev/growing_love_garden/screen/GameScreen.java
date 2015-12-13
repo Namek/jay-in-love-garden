@@ -149,7 +149,7 @@ public class GameScreen extends BaseScreen<GameScreen> {
 	
 	private Runnable showWinScreen = new Runnable() {
 		public void run() {
-			game.pushScreen(new WonGameScreen().init(game));
+			game.pushScreen(new WonGameScreen(setFirstLevel).init(game));
 		}
 	};
 }

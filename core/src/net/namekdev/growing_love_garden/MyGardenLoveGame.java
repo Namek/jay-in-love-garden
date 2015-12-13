@@ -6,6 +6,7 @@ import net.namekdev.growing_love_garden.screen.BaseScreen;
 import net.namekdev.growing_love_garden.screen.GameScreen;
 import net.namekdev.growing_love_garden.screen.InstructionScreen;
 import net.namekdev.growing_love_garden.screen.TalkScreen;
+import net.namekdev.growing_love_garden.screen.WonGameScreen;
 import net.namekdev.growing_love_garden.story.Talks;
 import net.namekdev.growing_love_garden.system.*;
 
