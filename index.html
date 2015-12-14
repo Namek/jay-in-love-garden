@@ -11,7 +11,7 @@
 			  </style>
        </head>
 
-       <body>
+       <body onkeydown="cancelSomeNastyKeys(event);">
               <div align="center" id="embed-html"></div>
               <script type="text/javascript" src="html/html.nocache.js"></script>
        </body>
@@ -31,5 +31,11 @@
               }
               document.getElementById('embed-html').addEventListener('mousedown', handleMouseDown, false);
               document.getElementById('embed-html').addEventListener('mouseup', handleMouseUp, false);
+			  
+			  function cancelSomeNastyKeys(evt) {
+			    if (evt.keyCode == 32 || (evt.keyCode >= 37 && evt.keyCode <= 40) || evt.keyCode == 13) {
+				  evt.preventDefault();
+				}
+			  }
        </script>
 </html>
